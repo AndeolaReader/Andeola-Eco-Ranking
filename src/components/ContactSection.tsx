@@ -1,202 +1,228 @@
 import React, { useState } from 'react';
-import { useApp } from '../context/AppContext';
-import { MessageSquare, Mail, Phone, Clock, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Mail, ArrowRight, CheckCircle2, MessageSquare, Clock, Globe } from 'lucide-react';
 
 export const ContactSection: React.FC = () => {
-  const { brandConfig } = useApp();
-  const [formSubmitted, setFormSubmitted] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    websiteUrl: '',
-    issueType: 'Website Error Fix',
-    message: ''
-  });
-
-  const whatsappHref = `https://wa.me/2348124349094?text=${encodeURIComponent("Hello ANDEOLA, I need help with my website.")}`;
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [businessName, setBusinessName] = useState('');
+  const [website, setWebsite] = useState('');
+  const [serviceNeeded, setServiceNeeded] = useState('Website Design');
+  const [budgetRange, setBudgetRange] = useState('$250 – $500');
+  const [message, setMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setFormSubmitted(true);
+    if (!name || !email) return;
+
+    setIsSubmitting(true);
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+    }, 600);
   };
 
   return (
-    <section id="contact" className="py-20 bg-[#F8FAFC] border-b border-slate-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-24 bg-[#F8FAFC] border-b border-slate-200">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
-          {/* Brand Contact Details */}
+          {/* Left Column: Direct Agency Contact Info */}
           <div className="lg:col-span-5 space-y-6">
-            <div>
-              <div className="text-xs font-bold uppercase tracking-wider text-[#2563EB] mb-2">
-                Direct Engineering Line
+            <div className="space-y-3">
+              <div className="text-xs font-bold uppercase tracking-widest text-[#2563EB]">
+                START A CONVERSATION
               </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#111827] tracking-tight">
-                Connect With ANDEOLA
+
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#08111F] tracking-tight uppercase leading-tight">
+                LET'S BUILD <br />
+                SOMETHING GREAT
               </h2>
-              <div className="text-xs font-semibold text-slate-500 uppercase tracking-widest mt-1">
-                ANDEOLA ECO RANKING
-              </div>
-              <p className="mt-3 text-sm text-slate-600 leading-relaxed">
-                Facing an urgent website error, checkout failure, or planning a full redesign? Contact us directly on WhatsApp or drop us an email for immediate triage.
+
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
+                Have a new project, redesign inquiry, or want to audit your existing digital presence? Send us your brief and we will reply promptly.
               </p>
             </div>
 
-            {/* Direct WhatsApp Action Button */}
-            <div className="p-6 rounded-2xl bg-emerald-950 text-white border border-emerald-800/80 shadow-lg">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-xl bg-emerald-500 text-white flex items-center justify-center shadow-md">
-                  <MessageSquare className="w-6 h-6" />
+            {/* Direct Email Display Card */}
+            <div className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-xs space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
+                  <Mail className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-white">Instant WhatsApp Triage</h4>
-                  <p className="text-xs text-emerald-300 font-mono">+234 812 434 9094</p>
-                </div>
-              </div>
-
-              <p className="text-xs text-emerald-200 mb-4 leading-relaxed">
-                Chat directly with our technical lead for rapid problem evaluation and expedited service scheduling.
-              </p>
-
-              <a
-                href={whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 text-xs font-bold rounded-lg bg-emerald-500 hover:bg-emerald-400 text-emerald-950 shadow-md transition-all font-sans"
-              >
-                <span>Chat With ANDEOLA</span>
-                <ArrowRight className="w-4 h-4" />
-              </a>
-            </div>
-
-            {/* Email & Details */}
-            <div className="space-y-3 text-xs text-slate-700">
-              <div className="flex items-center gap-3 p-3.5 rounded-xl bg-white border border-slate-200">
-                <Mail className="w-5 h-5 text-blue-600 shrink-0" />
-                <div>
-                  <div className="font-bold text-slate-900">Email Address</div>
-                  <a href="mailto:webhubtech299@gmail.com" className="text-blue-600 hover:underline font-mono">
-                    webhubtech299@gmail.com
+                  <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                    Direct Email Line
+                  </div>
+                  <a
+                    href="mailto:andeolareader4@gmail.com"
+                    className="text-sm sm:text-base font-bold text-[#08111F] hover:text-blue-600 transition-colors font-mono"
+                  >
+                    andeolareader4@gmail.com
                   </a>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 p-3.5 rounded-xl bg-white border border-slate-200">
-                <Clock className="w-5 h-5 text-purple-600 shrink-0" />
-                <div>
-                  <div className="font-bold text-slate-900">Response Turnaround</div>
-                  <div className="text-slate-600">Typically under 2 hours during active business cycles</div>
-                </div>
+              <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <span>Response Time:</span>
+                <span className="font-semibold text-slate-700">Within 24 Hours</span>
+              </div>
+            </div>
+
+            {/* Professional Standards */}
+            <div className="space-y-3 text-xs text-slate-600">
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>Transparent scope-based estimates</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>Direct engineer & designer communication</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>NDA & business confidentiality respected</span>
               </div>
             </div>
 
           </div>
 
-          {/* Contact & Scope Form */}
-          <div className="lg:col-span-7 bg-white p-8 sm:p-10 rounded-3xl border border-slate-200 shadow-md">
-            {formSubmitted ? (
+          {/* Right Column: Contact & Project Request Form */}
+          <div className="lg:col-span-7 bg-white rounded-3xl border border-slate-200 p-8 sm:p-10 shadow-lg">
+            {isSubmitted ? (
               <div className="py-12 text-center space-y-4">
-                <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
+                <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
                   <CheckCircle2 className="w-8 h-8" />
                 </div>
-                <h3 className="text-xl font-bold text-slate-900">Message Received</h3>
-                <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
-                  Thank you. An ANDEOLA technical engineer will review your website details and reply to <strong>{formData.email}</strong> shortly with recommended next steps.
+                <h3 className="text-2xl font-bold text-[#08111F]">
+                  Project Request Received
+                </h3>
+                <p className="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
+                  Thank you, {name}. Your request has reached ANDEOLA. We will review your goals and get in touch with you shortly.
                 </p>
                 <button
-                  onClick={() => setFormSubmitted(false)}
-                  className="mt-4 px-4 py-2 text-xs font-semibold rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200"
+                  onClick={() => setIsSubmitted(false)}
+                  className="mt-4 px-5 py-2.5 text-xs font-semibold rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200"
                 >
-                  Submit Another Inquiry
+                  Send Another Inquiry
                 </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <h3 className="text-lg font-bold text-[#111827]">
-                    Request a Project Evaluation or Quote
+                  <h3 className="text-lg font-bold text-[#08111F] uppercase tracking-wide">
+                    Request a Project Evaluation
                   </h3>
-                  <p className="text-xs text-slate-500 mt-1">
-                    Describe your website issue or project goals for an itemized scope estimate.
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Share your requirements to receive our detailed proposal.
                   </p>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Your Name</label>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">Name *</label>
                     <input
                       type="text"
                       required
-                      value={formData.name}
-                      onChange={e => setFormData({ ...formData, name: e.target.value })}
+                      value={name}
+                      onChange={e => setName(e.target.value)}
                       placeholder="Jane Doe"
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs sm:text-sm focus:outline-none focus:border-blue-500"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:border-blue-600 bg-white"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Email Address</label>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">Email *</label>
                     <input
                       type="email"
                       required
-                      value={formData.email}
-                      onChange={e => setFormData({ ...formData, email: e.target.value })}
+                      value={email}
+                      onChange={e => setEmail(e.target.value)}
                       placeholder="jane@company.com"
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs sm:text-sm focus:outline-none focus:border-blue-500"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:border-blue-600 bg-white"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Website URL</label>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">Business Name</label>
                     <input
                       type="text"
-                      value={formData.websiteUrl}
-                      onChange={e => setFormData({ ...formData, websiteUrl: e.target.value })}
-                      placeholder="https://example.com"
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs sm:text-sm focus:outline-none focus:border-blue-500 font-mono"
+                      value={businessName}
+                      onChange={e => setBusinessName(e.target.value)}
+                      placeholder="Acme Studio Ltd."
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:border-blue-600 bg-white"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Service or Problem Category</label>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">Website URL</label>
+                    <input
+                      type="text"
+                      value={website}
+                      onChange={e => setWebsite(e.target.value)}
+                      placeholder="https://example.com"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm font-mono focus:outline-none focus:border-blue-600 bg-white"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">Service Needed *</label>
                     <select
-                      value={formData.issueType}
-                      onChange={e => setFormData({ ...formData, issueType: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs sm:text-sm focus:outline-none focus:border-blue-500 bg-white"
+                      value={serviceNeeded}
+                      onChange={e => setServiceNeeded(e.target.value)}
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:border-blue-600 bg-white"
                     >
-                      <option>Website Design ($800+)</option>
-                      <option>Website Redesign ($600+)</option>
-                      <option>Website Error Fix ($100+)</option>
-                      <option>Shopify Support ($150+)</option>
-                      <option>Website Speed Optimization ($150+)</option>
-                      <option>Website Audit ($100+)</option>
-                      <option>E-commerce Optimization ($300+)</option>
-                      <option>Other Custom Solution</option>
+                      <option>Website Design</option>
+                      <option>Website Redesign</option>
+                      <option>Website Audit</option>
+                      <option>E-commerce Website</option>
+                      <option>Landing Page</option>
+                      <option>Website Optimization</option>
+                      <option>Custom Digital Solution</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">Budget Range</label>
+                    <select
+                      value={budgetRange}
+                      onChange={e => setBudgetRange(e.target.value)}
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:border-blue-600 bg-white"
+                    >
+                      <option>$25 – $100 (Website Audit)</option>
+                      <option>$100 – $250 (Landing Page)</option>
+                      <option>$250 – $500 (Business Website / Redesign)</option>
+                      <option>$500 – $1,000 (E-commerce / Multi-page)</option>
+                      <option>$1,000+ (Custom Architecture)</option>
                     </select>
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Project Details or Error Symptoms</label>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">Message *</label>
                   <textarea
                     rows={4}
                     required
-                    value={formData.message}
-                    onChange={e => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Describe what is happening with your website, recent changes, or your target timeline..."
-                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs sm:text-sm focus:outline-none focus:border-blue-500"
+                    value={message}
+                    onChange={e => setMessage(e.target.value)}
+                    placeholder="Tell us about your project, timeline, and current website challenges..."
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:border-blue-600 bg-white"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full py-3 px-4 text-xs font-bold rounded-lg bg-[#111827] hover:bg-[#2563EB] text-white transition-colors cursor-pointer flex items-center justify-center gap-2"
+                  disabled={isSubmitting}
+                  className="w-full py-4 px-6 text-xs sm:text-sm font-bold tracking-wide uppercase rounded-xl bg-[#2563EB] hover:bg-blue-600 disabled:opacity-50 text-white shadow-lg shadow-blue-600/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
-                  <span>Submit Project Inquiry</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <span>{isSubmitting ? 'Sending Request...' : 'SEND PROJECT REQUEST'}</span>
+                  <ArrowRight className="w-4 h-4" />
                 </button>
               </form>
             )}

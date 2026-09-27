@@ -1,218 +1,93 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import {
-  ServiceItem,
-  DigitalProduct,
-  Order,
-  ServicePaymentRequest,
-  Review,
-  VideoReview,
-  BankAccount,
-  WithdrawalRecord,
-  FinanceSummary,
-  BrandConfig
+import { 
+  ServiceItem, 
+  PortfolioProject, 
+  PricingPackage, 
+  AuditRequest, 
+  ProjectIntake, 
+  ClientPayment,
+  FAQItem 
 } from '../types';
-import {
-  INITIAL_SERVICES,
-  INITIAL_DIGITAL_PRODUCTS,
-  INITIAL_REVIEWS,
-  INITIAL_VIDEO_REVIEWS,
-  INITIAL_PAYMENT_REQUESTS,
-  INITIAL_BANK_ACCOUNT,
-  INITIAL_WITHDRAWALS,
-  DEFAULT_BRAND_CONFIG
-} from '../data/mockData';
+import { SERVICES, PORTFOLIO_PROJECTS, PRICING_PACKAGES, FAQS } from '../data/mockData';
 
 interface AppContextType {
   services: ServiceItem[];
-  digitalProducts: DigitalProduct[];
-  reviews: Review[];
-  videoReviews: VideoReview[];
-  orders: Order[];
-  paymentRequests: ServicePaymentRequest[];
-  bankAccount: BankAccount;
-  withdrawals: WithdrawalRecord[];
-  brandConfig: BrandConfig;
-  finance: FinanceSummary;
+  portfolioProjects: PortfolioProject[];
+  pricingPackages: PricingPackage[];
+  faqs: FAQItem[];
   
-  // Modals & UI state
+  // Stored state
+  auditRequests: AuditRequest[];
+  projectIntakes: ProjectIntake[];
+  clientPayments: ClientPayment[];
+
+  // Active modal
   activeModal: string | null;
   modalData: any;
   openModal: (modalName: string, data?: any) => void;
   closeModal: () => void;
 
+  // Shortcuts
+  openAuditModal: (defaultHelpWith?: string) => void;
+  openIntakeModal: (projectType?: string) => void;
+  openPaymentModal: (defaultService?: string, defaultAmount?: number) => void;
+  openServiceDetails: (service: ServiceItem) => void;
+  openPortfolioModal: (project: PortfolioProject) => void;
+
   // Actions
-  openCheckout: (product: DigitalProduct) => void;
-  openServiceRequest: (service?: ServiceItem) => void;
-  openPayPaymentRequest: (request: ServicePaymentRequest) => void;
+  submitAuditRequest: (data: Omit<AuditRequest, 'id' | 'submittedAt'>) => Promise<{ success: boolean; id: string }>;
+  submitProjectIntake: (data: Omit<ProjectIntake, 'id' | 'submittedAt'>) => Promise<{ success: boolean; id: string }>;
   processPayment: (details: {
-    customerName: string;
-    customerEmail: string;
-    itemId: string;
-    itemTitle: string;
-    itemType: 'digital_product' | 'service_request' | 'custom_invoice';
+    clientName: string;
+    email: string;
+    service: string;
     amount: number;
-    gateway: 'paystack' | 'flutterwave';
-  }) => Promise<Order>;
-  getDownloadContent: (token: string) => { title: string; content: string; filename: string } | null;
-  
-  // Admin Operations
-  createPaymentRequest: (request: Omit<ServicePaymentRequest, 'id' | 'createdAt' | 'status' | 'reference'>) => void;
-  addDigitalProduct: (product: Omit<DigitalProduct, 'id'>) => void;
-  updateServicePrice: (id: string, startingPrice: number, priceRange: string) => void;
-  updateBankAccount: (account: Partial<BankAccount>) => void;
-  requestWithdrawal: (amount: number) => { success: boolean; message: string };
-  updateBrandConfig: (config: Partial<BrandConfig>) => void;
-  addReview: (review: Omit<Review, 'id' | 'date'>) => void;
+    gateway: 'paystack' | 'flutterwave' | 'stripe' | 'paypal';
+  }) => Promise<ClientPayment>;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
-const LOCAL_STORAGE_KEY = 'andeola_app_state_v1';
+const STORAGE_KEY = 'andeola_agency_state_v2';
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // Load initial state with localStorage persistence
-  const [services, setServices] = useState<ServiceItem[]>(() => {
-    const saved = localStorage.getItem(`${LOCAL_STORAGE_KEY}_services`);
-    return saved ? JSON.parse(saved) : INITIAL_SERVICES;
+  const [services] = useState<ServiceItem[]>(SERVICES);
+  const [portfolioProjects] = useState<PortfolioProject[]>(PORTFOLIO_PROJECTS);
+  const [pricingPackages] = useState<PricingPackage[]>(PRICING_PACKAGES);
+  const [faqs] = useState<FAQItem[]>(FAQS);
+
+  const [auditRequests, setAuditRequests] = useState<AuditRequest[]>(() => {
+    const saved = localStorage.getItem(`${STORAGE_KEY}_audits`);
+    return saved ? JSON.parse(saved) : [];
   });
 
-  const [digitalProducts, setDigitalProducts] = useState<DigitalProduct[]>(() => {
-    const saved = localStorage.getItem(`${LOCAL_STORAGE_KEY}_products`);
-    return saved ? JSON.parse(saved) : INITIAL_DIGITAL_PRODUCTS;
+  const [projectIntakes, setProjectIntakes] = useState<ProjectIntake[]>(() => {
+    const saved = localStorage.getItem(`${STORAGE_KEY}_intakes`);
+    return saved ? JSON.parse(saved) : [];
   });
 
-  const [reviews, setReviews] = useState<Review[]>(() => {
-    const saved = localStorage.getItem(`${LOCAL_STORAGE_KEY}_reviews`);
-    return saved ? JSON.parse(saved) : INITIAL_REVIEWS;
+  const [clientPayments, setClientPayments] = useState<ClientPayment[]>(() => {
+    const saved = localStorage.getItem(`${STORAGE_KEY}_payments`);
+    return saved ? JSON.parse(saved) : [];
   });
 
-  const [videoReviews, setVideoReviews] = useState<VideoReview[]>(() => {
-    const saved = localStorage.getItem(`${LOCAL_STORAGE_KEY}_videos`);
-    return saved ? JSON.parse(saved) : INITIAL_VIDEO_REVIEWS;
-  });
-
-  const [orders, setOrders] = useState<Order[]>(() => {
-    const saved = localStorage.getItem(`${LOCAL_STORAGE_KEY}_orders`);
-    if (saved) return JSON.parse(saved);
-    // Seed initial demo purchases for customer demonstration
-    return [
-      {
-        id: 'ord-init-1',
-        reference: 'AND-ORD-77491',
-        customerName: 'Demo Client',
-        customerEmail: 'client@example.com',
-        itemType: 'digital_product',
-        itemId: 'shopify-checkout-guide',
-        itemTitle: 'SHOPIFY CHECKOUT TROUBLESHOOTING GUIDE',
-        amount: 19,
-        currency: 'USD',
-        gateway: 'paystack',
-        status: 'paid',
-        createdAt: '2026-09-24T10:14:00Z',
-        downloadToken: 'dl_sec_tok_77491_demo',
-        downloadCount: 1,
-        downloadLimit: 5,
-        invoiceNumber: 'INV-2026-0041'
-      }
-    ];
-  });
-
-  const [paymentRequests, setPaymentRequests] = useState<ServicePaymentRequest[]>(() => {
-    const saved = localStorage.getItem(`${LOCAL_STORAGE_KEY}_payment_requests`);
-    return saved ? JSON.parse(saved) : INITIAL_PAYMENT_REQUESTS;
-  });
-
-  const [bankAccount, setBankAccount] = useState<BankAccount>(() => {
-    const saved = localStorage.getItem(`${LOCAL_STORAGE_KEY}_bank`);
-    return saved ? JSON.parse(saved) : INITIAL_BANK_ACCOUNT;
-  });
-
-  const [withdrawals, setWithdrawals] = useState<WithdrawalRecord[]>(() => {
-    const saved = localStorage.getItem(`${LOCAL_STORAGE_KEY}_withdrawals`);
-    return saved ? JSON.parse(saved) : INITIAL_WITHDRAWALS;
-  });
-
-  const [brandConfig, setBrandConfig] = useState<BrandConfig>(() => {
-    const saved = localStorage.getItem(`${LOCAL_STORAGE_KEY}_brand`);
-    return saved ? JSON.parse(saved) : DEFAULT_BRAND_CONFIG;
-  });
-
-  // Modal system
   const [activeModal, setActiveModal] = useState<string | null>(null);
   const [modalData, setModalData] = useState<any>(null);
 
-  // Sync to local storage
   useEffect(() => {
-    localStorage.setItem(`${LOCAL_STORAGE_KEY}_services`, JSON.stringify(services));
-  }, [services]);
-
-  useEffect(() => {
-    localStorage.setItem(`${LOCAL_STORAGE_KEY}_products`, JSON.stringify(digitalProducts));
-  }, [digitalProducts]);
+    localStorage.setItem(`${STORAGE_KEY}_audits`, JSON.stringify(auditRequests));
+  }, [auditRequests]);
 
   useEffect(() => {
-    localStorage.setItem(`${LOCAL_STORAGE_KEY}_orders`, JSON.stringify(orders));
-  }, [orders]);
+    localStorage.setItem(`${STORAGE_KEY}_intakes`, JSON.stringify(projectIntakes));
+  }, [projectIntakes]);
 
   useEffect(() => {
-    localStorage.setItem(`${LOCAL_STORAGE_KEY}_payment_requests`, JSON.stringify(paymentRequests));
-  }, [paymentRequests]);
+    localStorage.setItem(`${STORAGE_KEY}_payments`, JSON.stringify(clientPayments));
+  }, [clientPayments]);
 
-  useEffect(() => {
-    localStorage.setItem(`${LOCAL_STORAGE_KEY}_withdrawals`, JSON.stringify(withdrawals));
-  }, [withdrawals]);
-
-  useEffect(() => {
-    localStorage.setItem(`${LOCAL_STORAGE_KEY}_bank`, JSON.stringify(bankAccount));
-  }, [bankAccount]);
-
-  useEffect(() => {
-    localStorage.setItem(`${LOCAL_STORAGE_KEY}_brand`, JSON.stringify(brandConfig));
-  }, [brandConfig]);
-
-  // Derived Finance calculations
-  const calculateFinance = (): FinanceSummary => {
-    const digitalRevenue = orders
-      .filter(o => o.status === 'paid' && o.itemType === 'digital_product')
-      .reduce((acc, curr) => acc + curr.amount, 0);
-
-    const paidPaymentRequests = paymentRequests
-      .filter(r => r.status === 'PAID')
-      .reduce((acc, curr) => acc + curr.amount, 0);
-
-    const serviceOrdersRevenue = orders
-      .filter(o => o.status === 'paid' && o.itemType !== 'digital_product')
-      .reduce((acc, curr) => acc + curr.amount, 0);
-
-    const serviceRevenue = paidPaymentRequests + serviceOrdersRevenue;
-    const totalRevenue = digitalRevenue + serviceRevenue;
-
-    const pendingPayments = paymentRequests
-      .filter(r => r.status === 'PENDING')
-      .reduce((acc, curr) => acc + curr.amount, 0);
-
-    const withdrawnAmount = withdrawals
-      .filter(w => w.status === 'Successful')
-      .reduce((acc, curr) => acc + curr.amount, 0);
-
-    // Available settled balance is settled gross minus withdrawn
-    const settledBalance = Math.max(0, totalRevenue - withdrawnAmount);
-    const pendingBalance = pendingPayments;
-
-    return {
-      totalRevenue,
-      serviceRevenue,
-      digitalSolutionRevenue: digitalRevenue,
-      pendingPayments,
-      settledBalance,
-      pendingBalance,
-      withdrawnAmount,
-      currency: 'USD'
-    };
-  };
-
-  const openModal = (name: string, data?: any) => {
-    setActiveModal(name);
+  const openModal = (modalName: string, data?: any) => {
+    setActiveModal(modalName);
     setModalData(data || null);
   };
 
@@ -221,182 +96,93 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setModalData(null);
   };
 
-  const openCheckout = (product: DigitalProduct) => {
-    openModal('checkout', product);
+  const openAuditModal = (defaultHelpWith?: string) => {
+    openModal('free-audit', { needHelpWith: defaultHelpWith || 'Website Audit' });
   };
 
-  const openServiceRequest = (service?: ServiceItem) => {
-    openModal('service-request', service);
+  const openIntakeModal = (projectType?: string) => {
+    openModal('project-intake', { projectType: projectType || 'Website Redesign' });
   };
 
-  const openPayPaymentRequest = (request: ServicePaymentRequest) => {
-    openModal('payment-request', request);
+  const openPaymentModal = (defaultService?: string, defaultAmount?: number) => {
+    openModal('project-payment', { service: defaultService || 'Website Design', amount: defaultAmount || 250 });
+  };
+
+  const openServiceDetails = (service: ServiceItem) => {
+    openModal('service-details', service);
+  };
+
+  const openPortfolioModal = (project: PortfolioProject) => {
+    openModal('portfolio-details', project);
+  };
+
+  const submitAuditRequest = async (data: Omit<AuditRequest, 'id' | 'submittedAt'>) => {
+    const id = `aud-${Date.now()}`;
+    const newRecord: AuditRequest = {
+      ...data,
+      id,
+      submittedAt: new Date().toISOString()
+    };
+    setAuditRequests(prev => [newRecord, ...prev]);
+    return { success: true, id };
+  };
+
+  const submitProjectIntake = async (data: Omit<ProjectIntake, 'id' | 'submittedAt'>) => {
+    const id = `intk-${Date.now()}`;
+    const newRecord: ProjectIntake = {
+      ...data,
+      id,
+      submittedAt: new Date().toISOString()
+    };
+    setProjectIntakes(prev => [newRecord, ...prev]);
+    return { success: true, id };
   };
 
   const processPayment = async (details: {
-    customerName: string;
-    customerEmail: string;
-    itemId: string;
-    itemTitle: string;
-    itemType: 'digital_product' | 'service_request' | 'custom_invoice';
+    clientName: string;
+    email: string;
+    service: string;
     amount: number;
-    gateway: 'paystack' | 'flutterwave';
-  }): Promise<Order> => {
-    // Generate secure reference and simulated signed token
-    const refNumber = Math.floor(100000 + Math.random() * 900000);
-    const reference = `AND-${details.gateway.toUpperCase().slice(0, 3)}-${refNumber}`;
-    const invoiceNumber = `INV-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
-    const downloadToken = `dl_sec_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
-
-    const newOrder: Order = {
-      id: `ord-${Date.now()}`,
+    gateway: 'paystack' | 'flutterwave' | 'stripe' | 'paypal';
+  }): Promise<ClientPayment> => {
+    const reference = `AND-${details.gateway.toUpperCase().slice(0, 3)}-${Date.now().toString().slice(-6)}`;
+    const newPayment: ClientPayment = {
+      id: `pay-${Date.now()}`,
       reference,
-      customerName: details.customerName,
-      customerEmail: details.customerEmail,
-      itemType: details.itemType,
-      itemId: details.itemId,
-      itemTitle: details.itemTitle,
+      clientName: details.clientName,
+      email: details.email,
+      service: details.service,
       amount: details.amount,
-      currency: 'USD',
       gateway: details.gateway,
-      status: 'paid',
-      createdAt: new Date().toISOString(),
-      downloadToken: details.itemType === 'digital_product' ? downloadToken : undefined,
-      downloadCount: 0,
-      downloadLimit: 5,
-      invoiceNumber
+      status: 'completed',
+      paidAt: new Date().toISOString()
     };
-
-    setOrders(prev => [newOrder, ...prev]);
-
-    // If it was a service payment request, mark that request as PAID
-    if (details.itemType === 'custom_invoice') {
-      setPaymentRequests(prev =>
-        prev.map(req =>
-          req.id === details.itemId
-            ? { ...req, status: 'PAID', paidAt: new Date().toISOString() }
-            : req
-        )
-      );
-    }
-
-    return newOrder;
-  };
-
-  const getDownloadContent = (token: string) => {
-    const order = orders.find(o => o.downloadToken === token && o.status === 'paid');
-    if (!order) return null;
-
-    const product = digitalProducts.find(p => p.id === order.itemId);
-    if (!product) return null;
-
-    return {
-      title: product.title,
-      content: product.downloadContentSample,
-      filename: `${product.id}-andeola-guide.txt`
-    };
-  };
-
-  const createPaymentRequest = (req: Omit<ServicePaymentRequest, 'id' | 'createdAt' | 'status' | 'reference'>) => {
-    const newReq: ServicePaymentRequest = {
-      ...req,
-      id: `inv-req-${Date.now()}`,
-      reference: `AND-PRQ-${Math.floor(100000 + Math.random() * 900000)}`,
-      createdAt: new Date().toISOString().split('T')[0],
-      status: 'PENDING'
-    };
-    setPaymentRequests(prev => [newReq, ...prev]);
-  };
-
-  const addDigitalProduct = (product: Omit<DigitalProduct, 'id'>) => {
-    const id = product.title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-    const newProduct: DigitalProduct = {
-      ...product,
-      id: `prod-${id}-${Date.now().toString().slice(-4)}`
-    };
-    setDigitalProducts(prev => [newProduct, ...prev]);
-  };
-
-  const updateServicePrice = (id: string, startingPrice: number, priceRange: string) => {
-    setServices(prev =>
-      prev.map(s => (s.id === id ? { ...s, startingPrice, priceRange } : s))
-    );
-  };
-
-  const updateBankAccount = (account: Partial<BankAccount>) => {
-    setBankAccount(prev => ({ ...prev, ...account }));
-  };
-
-  const requestWithdrawal = (amount: number) => {
-    const currentFinance = calculateFinance();
-    if (amount < 50) {
-      return { success: false, message: 'Minimum withdrawal is $50.00 USD.' };
-    }
-    if (amount > currentFinance.settledBalance) {
-      return {
-        success: false,
-        message: `Insufficient settled balance. Available: $${currentFinance.settledBalance.toLocaleString()} USD.`
-      };
-    }
-
-    const newRecord: WithdrawalRecord = {
-      id: `wdr-${Date.now()}`,
-      reference: `WDR-${Date.now().toString().slice(-6)}`,
-      date: new Date().toISOString().split('T')[0],
-      amount,
-      currency: 'USD',
-      destinationBank: bankAccount.bankName,
-      destinationAccount: bankAccount.accountNumberMasked,
-      status: 'Successful',
-      notes: 'Direct payout routed via settled provider gateway.'
-    };
-
-    setWithdrawals(prev => [newRecord, ...prev]);
-    return { success: true, message: `Withdrawal of $${amount.toLocaleString()} USD successfully queued.` };
-  };
-
-  const updateBrandConfig = (config: Partial<BrandConfig>) => {
-    setBrandConfig(prev => ({ ...prev, ...config }));
-  };
-
-  const addReview = (review: Omit<Review, 'id' | 'date'>) => {
-    const newRev: Review = {
-      ...review,
-      id: `rev-${Date.now()}`,
-      date: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
-    };
-    setReviews(prev => [newRev, ...prev]);
+    setClientPayments(prev => [newPayment, ...prev]);
+    return newPayment;
   };
 
   return (
     <AppContext.Provider
       value={{
         services,
-        digitalProducts,
-        reviews,
-        videoReviews,
-        orders,
-        paymentRequests,
-        bankAccount,
-        withdrawals,
-        brandConfig,
-        finance: calculateFinance(),
+        portfolioProjects,
+        pricingPackages,
+        faqs,
+        auditRequests,
+        projectIntakes,
+        clientPayments,
         activeModal,
         modalData,
         openModal,
         closeModal,
-        openCheckout,
-        openServiceRequest,
-        openPayPaymentRequest,
-        processPayment,
-        getDownloadContent,
-        createPaymentRequest,
-        addDigitalProduct,
-        updateServicePrice,
-        updateBankAccount,
-        requestWithdrawal,
-        updateBrandConfig,
-        addReview
+        openAuditModal,
+        openIntakeModal,
+        openPaymentModal,
+        openServiceDetails,
+        openPortfolioModal,
+        submitAuditRequest,
+        submitProjectIntake,
+        processPayment
       }}
     >
       {children}
