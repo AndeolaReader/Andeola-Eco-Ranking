@@ -10,7 +10,7 @@ export const PaymentModal: React.FC = () => {
   const [clientName, setClientName] = useState('');
   const [email, setEmail] = useState('');
   const [service, setService] = useState(modalData?.service || 'Website Design');
-  const [amount, setAmount] = useState<number>(modalData?.amount || 250);
+  const [amount, setAmount] = useState<number>(modalData?.amount || 800);
   const [gateway, setGateway] = useState<'paystack' | 'flutterwave' | 'stripe' | 'paypal'>('paystack');
   const [isProcessing, setIsProcessing] = useState(false);
   const [completedPayment, setCompletedPayment] = useState<ClientPayment | null>(null);
@@ -19,11 +19,22 @@ export const PaymentModal: React.FC = () => {
     'Website Design',
     'Website Redesign',
     'Website Audit',
-    'E-commerce',
+    'Shopify & E-commerce Store',
     'Landing Page',
     'Website Optimization',
     'Custom Project'
   ];
+
+  const handleServiceSelect = (val: string) => {
+    setService(val);
+    if (val === 'Website Design') setAmount(800);
+    else if (val === 'Website Redesign') setAmount(500);
+    else if (val === 'Website Audit') setAmount(150);
+    else if (val.includes('E-commerce') || val.includes('Shopify')) setAmount(800);
+    else if (val === 'Landing Page') setAmount(100);
+    else if (val === 'Website Optimization') setAmount(300);
+    else if (val === 'Custom Project') setAmount(400);
+  };
 
   const handlePay = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -126,7 +137,7 @@ export const PaymentModal: React.FC = () => {
                 <label className="block text-xs font-bold text-slate-700 mb-1">Service *</label>
                 <select
                   value={service}
-                  onChange={e => setService(e.target.value)}
+                  onChange={e => handleServiceSelect(e.target.value)}
                   className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:border-blue-600 bg-white"
                 >
                   {servicesList.map(s => (

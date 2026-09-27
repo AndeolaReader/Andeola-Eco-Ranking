@@ -175,7 +175,7 @@ export const FreeAuditSection: React.FC = () => {
                     >
                       <option value="Website Redesign">Website Redesign</option>
                       <option value="New Website">New Website</option>
-                      <option value="E-commerce">E-commerce</option>
+                      <option value="Shopify & E-commerce">Shopify & E-commerce</option>
                       <option value="Website Audit">Website Audit</option>
                       <option value="Landing Page">Landing Page</option>
                       <option value="Website Optimization">Website Optimization</option>

@@ -9,7 +9,7 @@ export const PaymentSection: React.FC = () => {
   const [clientName, setClientName] = useState('');
   const [email, setEmail] = useState('');
   const [service, setService] = useState('Website Design');
-  const [amount, setAmount] = useState<number>(250);
+  const [amount, setAmount] = useState<number>(800);
   const [gateway, setGateway] = useState<'paystack' | 'flutterwave' | 'stripe' | 'paypal'>('paystack');
   const [isProcessing, setIsProcessing] = useState(false);
   const [completedPayment, setCompletedPayment] = useState<ClientPayment | null>(null);
@@ -18,7 +18,7 @@ export const PaymentSection: React.FC = () => {
     'Website Design',
     'Website Redesign',
     'Website Audit',
-    'E-commerce',
+    'Shopify & E-commerce Store',
     'Landing Page',
     'Website Optimization',
     'Custom Project'
@@ -27,13 +27,13 @@ export const PaymentSection: React.FC = () => {
   const handleServiceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const val = e.target.value;
     setService(val);
-    if (val === 'Website Design') setAmount(250);
-    else if (val === 'Website Redesign') setAmount(200);
-    else if (val === 'Website Audit') setAmount(25);
-    else if (val === 'E-commerce') setAmount(350);
+    if (val === 'Website Design') setAmount(800);
+    else if (val === 'Website Redesign') setAmount(500);
+    else if (val === 'Website Audit') setAmount(150);
+    else if (val.includes('E-commerce') || val.includes('Shopify')) setAmount(800);
     else if (val === 'Landing Page') setAmount(100);
-    else if (val === 'Website Optimization') setAmount(120);
-    else if (val === 'Custom Project') setAmount(500);
+    else if (val === 'Website Optimization') setAmount(300);
+    else if (val === 'Custom Project') setAmount(400);
   };
 
   const handleContinuePayment = async (e: React.FormEvent) => {

@@ -87,9 +87,14 @@ export const ServicesSection: React.FC = () => {
                   {service.description}
                 </p>
 
-                {/* Starting Price quiet line */}
+                {/* Starting Price & Scope Range line */}
                 <div className="mt-5 pt-4 border-t border-slate-200/60 flex items-center justify-between text-xs text-slate-500">
-                  <span className="font-medium">{service.priceDisplay}</span>
+                  <div className="flex flex-col">
+                    <span className="font-bold text-[#08111F] text-sm font-mono">{service.priceDisplay}</span>
+                    {service.priceRange && (
+                      <span className="text-[11px] text-slate-500 font-mono">Scope: {service.priceRange}</span>
+                    )}
+                  </div>
                   <span className="font-mono text-[11px] text-slate-400">{service.turnaroundTime}</span>
                 </div>
               </div>

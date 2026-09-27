@@ -5,8 +5,9 @@ export const SERVICES: ServiceItem[] = [
     id: 'web-design',
     number: '01',
     name: 'Website Design',
-    startingPrice: 250,
-    priceDisplay: 'Starting from $250',
+    startingPrice: 800,
+    priceDisplay: 'Starting from $800',
+    priceRange: '$800 – $1,500',
     description: 'Custom websites designed around your brand, audience, and business goals.',
     ctaText: 'Explore Service',
     category: 'design',
@@ -23,8 +24,9 @@ export const SERVICES: ServiceItem[] = [
     id: 'web-redesign',
     number: '02',
     name: 'Website Redesign',
-    startingPrice: 200,
-    priceDisplay: 'Starting from $200',
+    startingPrice: 500,
+    priceDisplay: 'Starting from $500',
+    priceRange: '$500 – $1,200',
     description: 'Transform an outdated website into a modern, responsive, professional experience.',
     ctaText: 'Explore Service',
     category: 'redesign',
@@ -40,17 +42,18 @@ export const SERVICES: ServiceItem[] = [
   {
     id: 'web-audit',
     number: '03',
-    name: 'Website Audit',
-    startingPrice: 25,
-    priceDisplay: 'Starting from $25',
-    description: 'Identify UX, design, mobile, speed, content, and conversion problems affecting your website.',
+    name: 'Website Audit & Diagnostic',
+    startingPrice: 150,
+    priceDisplay: 'Starting from $150',
+    priceRange: '$150 – $350',
+    description: 'Comprehensive forensic analysis of UX, mobile viewport, speed, and conversion bottlenecks on your website or online store.',
     ctaText: 'Get an Audit',
     category: 'audit',
     turnaroundTime: '2–3 Days',
     features: [
       'Conversion barrier diagnostic',
       'Mobile usability & viewport inspection',
-      'Page speed & performance check',
+      'Page speed & Core Web Vitals check',
       'Prioritized remediation action plan'
     ],
     deliverables: ['Itemized findings report', 'UX review', 'Conversion recommendations', 'Speed guidance']
@@ -58,20 +61,21 @@ export const SERVICES: ServiceItem[] = [
   {
     id: 'ecommerce',
     number: '04',
-    name: 'E-commerce Websites',
-    startingPrice: 350,
-    priceDisplay: 'Starting from $350',
-    description: 'Create a professional online store that makes browsing and purchasing simple.',
+    name: 'Shopify & E-commerce Store Design',
+    startingPrice: 800,
+    priceDisplay: 'Starting from $800',
+    priceRange: '$800 – $1,500',
+    description: 'Full custom Shopify & e-commerce store design engineered for browsing simplicity, trust, product merchandising, and high checkout conversion.',
     ctaText: 'Build My Store',
     category: 'ecommerce',
     turnaroundTime: '10–18 Days',
     features: [
-      'Intuitive product catalog & filters',
-      'Frictionless checkout experience',
-      'Mobile payment integration (Stripe, Paystack, Flutterwave, PayPal)',
-      'Inventory & order notification workflows'
+      'Custom Shopify theme & collection architecture',
+      'Frictionless checkout experience & cart drawer',
+      'Multi-currency payment integration (Paystack, Flutterwave, Stripe, PayPal)',
+      'Inventory, shipping rules & transactional notifications'
     ],
-    deliverables: ['Store architecture', 'Product template design', 'Payment gateway setup', 'Testing & launch']
+    deliverables: ['Full store architecture', 'Product & collection templates', 'Payment gateway setup', 'Testing & launch']
   },
   {
     id: 'landing-pages',
@@ -79,6 +83,7 @@ export const SERVICES: ServiceItem[] = [
     name: 'Landing Pages',
     startingPrice: 100,
     priceDisplay: 'Starting from $100',
+    priceRange: '$100 – $250',
     description: 'High-impact landing pages designed to communicate your offer and drive action.',
     ctaText: 'Build a Landing Page',
     category: 'landing',
@@ -95,8 +100,9 @@ export const SERVICES: ServiceItem[] = [
     id: 'web-optimization',
     number: '06',
     name: 'Website Optimization',
-    startingPrice: 120,
-    priceDisplay: 'Starting from $120',
+    startingPrice: 300,
+    priceDisplay: 'Starting from $300',
+    priceRange: '$300 – $600',
     description: 'Improve an existing website without necessarily rebuilding it from scratch.',
     ctaText: 'Optimize My Website',
     category: 'optimization',
@@ -189,15 +195,16 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 export const PRICING_PACKAGES: PricingPackage[] = [
   {
     id: 'pkg-audit',
-    name: 'Website Audit',
-    startingPrice: 25,
-    priceDisplay: 'Starting from $25',
-    description: 'Detailed analysis of your current website to uncover UX, design, speed, and conversion friction.',
+    name: 'Website Audit & Diagnostic',
+    startingPrice: 150,
+    priceDisplay: 'Starting from $150',
+    priceRange: '$150 – $350',
+    description: 'Detailed forensic analysis of your current website or Shopify store to uncover UX, design, mobile layout, speed, and conversion friction.',
     features: [
-      'Comprehensive UX & visual audit',
-      'Mobile responsiveness check',
-      'Speed & page weight diagnostic',
-      'Itemized opportunities list',
+      'Comprehensive UX & visual hierarchy audit',
+      'Mobile responsiveness & tap-target diagnostics',
+      'Speed, page weight & Core Web Vitals audit',
+      'Prioritized remediation action plan',
       'Delivered in 48–72 hours'
     ],
     ctaText: 'Get an Audit'
@@ -207,12 +214,13 @@ export const PRICING_PACKAGES: PricingPackage[] = [
     name: 'Landing Page',
     startingPrice: 100,
     priceDisplay: 'Starting from $100',
-    description: 'Focused, single-page website structured to present your offer clearly and generate inquiries.',
+    priceRange: '$100 – $250',
+    description: 'High-impact, single-page website structured to present your offer with maximum clarity and drive lead action.',
     features: [
       'Strategic value proposition structure',
-      'Mobile-responsive layout',
-      'Lead capture form setup',
-      'Fast loading performance',
+      'Mobile-first responsive layout',
+      'Lead capture form integration',
+      'Fast loading performance & clean styling',
       'Standard turnaround 3–5 days'
     ],
     ctaText: 'Build a Landing Page'
@@ -220,15 +228,16 @@ export const PRICING_PACKAGES: PricingPackage[] = [
   {
     id: 'pkg-business',
     name: 'Business Website',
-    startingPrice: 250,
-    priceDisplay: 'Starting from $250',
-    description: 'Custom multi-page website tailored to establish credibility and communicate your business value.',
+    startingPrice: 800,
+    priceDisplay: 'Starting from $800',
+    priceRange: '$800 – $1,500',
+    description: 'Custom multi-page website tailored to establish market authority, communicate your business value, and generate qualified leads.',
     features: [
-      'Custom bespoke UI/UX design',
+      'Custom bespoke UI/UX architecture',
       'Up to 5 strategic pages (Home, About, Services, etc.)',
-      'Contact & inquiry form integrations',
-      'Search engine friendly structure',
-      'Full cross-device testing'
+      'Contact & booking inquiry form integrations',
+      'Search engine friendly semantic structure',
+      'Full cross-device viewport testing'
     ],
     isPopular: true,
     ctaText: 'Start Business Website'
@@ -236,45 +245,49 @@ export const PRICING_PACKAGES: PricingPackage[] = [
   {
     id: 'pkg-redesign',
     name: 'Website Redesign',
-    startingPrice: 200,
-    priceDisplay: 'Starting from $200',
-    description: 'Overhaul your existing website into a modern, responsive, and higher-converting digital home.',
+    startingPrice: 500,
+    priceDisplay: 'Starting from $500',
+    priceRange: '$500 – $1,200',
+    description: 'Transform an outdated website into a modern, responsive, and higher-converting digital home without losing brand equity.',
     features: [
-      'Visual hierarchy and typography modernization',
-      'Mobile experience cleanup',
-      'Content migration assistance',
-      'Broken link & speed fixes',
-      'Preserve existing domain & SEO rankings'
+      'Visual hierarchy and typography overhaul',
+      'Mobile layout cleanup & modern UX',
+      'Content migration & image reformatting',
+      'Speed tuning & broken links remediation',
+      'Preserve existing domain & SEO indexation'
     ],
     ctaText: 'Redesign My Website'
   },
   {
     id: 'pkg-ecommerce',
-    name: 'E-commerce Website',
-    startingPrice: 350,
-    priceDisplay: 'Starting from $350',
-    description: 'Full-featured online store configured to make product browsing, selection, and purchasing seamless.',
+    name: 'Shopify & E-commerce Store',
+    startingPrice: 800,
+    priceDisplay: 'Starting from $800',
+    priceRange: '$800 – $1,500',
+    description: 'Full custom Shopify or e-commerce store configured to make product discovery, browsing, and purchasing seamless.',
     features: [
-      'Product catalog and collection setup',
-      'Secure payment gateway integration',
-      'Mobile shopping cart and drawer',
-      'Order notifications & policy pages',
-      'Basic inventory management training'
+      'Custom Shopify theme & catalog configuration',
+      'Secure multi-currency payment gateway integration',
+      'Mobile shopping cart, drawer & checkout optimization',
+      'Automated transactional emails & policy templates',
+      'Inventory management & app conflict resolution'
     ],
+    isPopular: true,
     ctaText: 'Build My Store'
   },
   {
     id: 'pkg-custom',
-    name: 'Custom Website',
-    startingPrice: 0,
-    priceDisplay: 'Request a Quote',
-    description: 'Complex requirements, web applications, custom integrations, or extensive multi-page architectures.',
+    name: 'Custom Architecture',
+    startingPrice: 400,
+    priceDisplay: 'Starting from $400',
+    priceRange: 'Starting from $400+',
+    description: 'Custom requirements, tailored web features, specialized integrations, or personalized digital architectures.',
     features: [
-      'Tailored scope document and timeline',
-      'Dedicated UI/UX wireframing',
-      'Custom integrations (APIs, CRM, bookings)',
-      'Milestone-based delivery',
-      'Ongoing support options'
+      'Tailored scope document and milestone delivery plan',
+      'Dedicated UI/UX wireframing & interactive prototypes',
+      'Custom integrations & component design',
+      'Staging environment testing & launch readiness',
+      'Post-launch support & ongoing maintenance options'
     ],
     ctaText: 'Request a Quote'
   }
@@ -364,12 +377,12 @@ export const FAQS: FAQItem[] = [
     a: 'Yes. We regularly transform outdated, sluggish, or cluttered websites into modern, responsive, and conversion-focused experiences while preserving your existing domain and brand assets.'
   },
   {
-    q: 'Can you build an e-commerce website?',
-    a: 'Yes. We design and develop e-commerce storefronts with clean product presentations, simple catalog filtering, and secure payment gateway integrations (including Paystack, Flutterwave, Stripe, and PayPal).'
+    q: 'Can you build or redesign a Shopify store or e-commerce website?',
+    a: 'Yes. We design and build high-converting Shopify stores and e-commerce websites ($800–$1,500) and perform complete Shopify store redesigns (starting from $500) with clean product merchandising, custom theme styling, cart drawer optimization, and multi-currency gateway integrations (Paystack, Flutterwave, Stripe, PayPal).'
   },
   {
-    q: 'Can you audit my current website?',
-    a: 'Yes. We offer both a free initial website evaluation and comprehensive paid website audits ($25+) that inspect UX design, mobile responsiveness, page speed, content hierarchy, and conversion bottlenecks.'
+    q: 'Can you audit my current website or Shopify store?',
+    a: 'Yes. We offer both a free initial website evaluation and comprehensive forensic website audits ($150–$350) that inspect UX design, mobile responsiveness, page speed, content hierarchy, and conversion bottlenecks.'
   },
   {
     q: 'Do you work with existing websites?',

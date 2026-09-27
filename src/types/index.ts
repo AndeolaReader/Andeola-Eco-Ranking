@@ -4,6 +4,7 @@ export interface ServiceItem {
   name: string;
   startingPrice: number;
   priceDisplay: string;
+  priceRange?: string;
   description: string;
   ctaText: string;
   category: 'design' | 'redesign' | 'audit' | 'ecommerce' | 'landing' | 'optimization';
@@ -30,6 +31,7 @@ export interface PricingPackage {
   name: string;
   startingPrice: number;
   priceDisplay: string;
+  priceRange?: string;
   description: string;
   features: string[];
   isPopular?: boolean;

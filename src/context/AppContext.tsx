@@ -105,7 +105,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   };
 
   const openPaymentModal = (defaultService?: string, defaultAmount?: number) => {
-    openModal('project-payment', { service: defaultService || 'Website Design', amount: defaultAmount || 250 });
+    openModal('project-payment', { service: defaultService || 'Website Design', amount: defaultAmount || 800 });
   };
 
   const openServiceDetails = (service: ServiceItem) => {

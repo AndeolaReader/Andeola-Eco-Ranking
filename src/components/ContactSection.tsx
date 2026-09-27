@@ -195,11 +195,11 @@ export const ContactSection: React.FC = () => {
                       onChange={e => setBudgetRange(e.target.value)}
                       className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:border-blue-600 bg-white"
                     >
-                      <option>$25 – $100 (Website Audit)</option>
-                      <option>$100 – $250 (Landing Page)</option>
-                      <option>$250 – $500 (Business Website / Redesign)</option>
-                      <option>$500 – $1,000 (E-commerce / Multi-page)</option>
-                      <option>$1,000+ (Custom Architecture)</option>
+                      <option>$100 – $250 (Website Audit)</option>
+                      <option>$250 – $500 (Landing Page / Optimization)</option>
+                      <option>$500 – $1,200 (Website Redesign)</option>
+                      <option>$800 – $1,500 (Full Shopify & Website Store Design)</option>
+                      <option>$1,500+ (Custom Architecture & Scaled Platforms)</option>
                     </select>
                   </div>
                 </div>

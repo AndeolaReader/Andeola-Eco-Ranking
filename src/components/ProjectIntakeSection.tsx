@@ -163,12 +163,13 @@ export const ProjectIntakeSection: React.FC = () => {
                     onChange={e => setProjectType(e.target.value)}
                     className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:border-blue-600 bg-white"
                   >
-                    <option value="Website Design">Website Design</option>
-                    <option value="Website Redesign">Website Redesign</option>
-                    <option value="E-commerce Website">E-commerce Website</option>
-                    <option value="Landing Page">Landing Page</option>
-                    <option value="Website Optimization">Website Optimization</option>
-                    <option value="Custom Project">Custom Project</option>
+                    <option value="Website Design">Website Design ($800 – $1,500)</option>
+                    <option value="Website Redesign">Website Redesign ($500 – $1,200)</option>
+                    <option value="Shopify & E-commerce Store">Shopify & E-commerce Store ($800 – $1,500)</option>
+                    <option value="Website Audit & Diagnostic">Website Audit & Diagnostic ($150 – $350)</option>
+                    <option value="Landing Page">Landing Page ($100 – $250)</option>
+                    <option value="Website Optimization">Website Optimization ($300 – $600)</option>
+                    <option value="Custom Project">Custom Project (Starting $400+)</option>
                   </select>
                 </div>
               </div>

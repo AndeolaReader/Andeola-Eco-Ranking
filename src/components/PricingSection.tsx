@@ -4,7 +4,7 @@ import { PricingPackage } from '../types';
 import { Check, ArrowRight, Info, Sparkles } from 'lucide-react';
 
 export const PricingSection: React.FC = () => {
-  const { pricingPackages, openIntakeModal, openAuditModal } = useApp();
+  const { pricingPackages, openIntakeModal, openAuditModal, openServiceDetails, services } = useApp();
 
   const handlePackageCta = (pkg: PricingPackage) => {
     if (pkg.id === 'pkg-audit') {
@@ -12,6 +12,13 @@ export const PricingSection: React.FC = () => {
     } else {
       openIntakeModal(pkg.name);
     }
+  };
+
+  const handleViewDetails = (pkg: PricingPackage) => {
+    // Map pricing package to corresponding service detail
+    let matchingService = services.find(s => s.name.toLowerCase().includes(pkg.name.toLowerCase().split(' ')[0]));
+    if (!matchingService) matchingService = services[0];
+    openServiceDetails(matchingService);
   };
 
   return (
@@ -67,14 +74,19 @@ export const PricingSection: React.FC = () => {
                 {/* Price Display */}
                 <div className="mt-5 mb-4">
                   <span className="text-xs text-slate-500 font-semibold uppercase tracking-wider block">
-                    {pkg.startingPrice > 0 ? 'Starting From' : 'Bespoke Engineering'}
+                    Starting From
                   </span>
-                  <div className="text-3xl font-extrabold text-[#08111F] font-mono mt-1">
-                    {pkg.startingPrice > 0 ? `$${pkg.startingPrice}` : 'Custom'}
-                    {pkg.startingPrice > 0 && (
-                      <span className="text-xs font-sans text-slate-500 font-normal ml-1">USD</span>
-                    )}
+                  <div className="flex items-baseline gap-2 mt-1">
+                    <span className="text-3xl font-extrabold text-[#08111F] font-mono">
+                      ${pkg.startingPrice}
+                    </span>
+                    <span className="text-xs font-sans text-slate-500 font-normal">USD</span>
                   </div>
+                  {pkg.priceRange && (
+                    <div className="text-xs font-mono font-semibold text-blue-600 mt-1">
+                      Expected Scope: {pkg.priceRange}
+                    </div>
+                  )}
                 </div>
 
                 <p className="text-xs text-slate-600 leading-relaxed min-h-[40px]">
@@ -107,6 +119,13 @@ export const PricingSection: React.FC = () => {
                 >
                   <span>{pkg.ctaText}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+
+                <button
+                  onClick={() => handleViewDetails(pkg)}
+                  className="w-full py-2.5 px-4 rounded-xl text-xs font-semibold text-slate-600 hover:text-[#08111F] hover:bg-slate-100 border border-slate-200 transition-colors flex items-center justify-center gap-1 cursor-pointer"
+                >
+                  <span>VIEW DETAILS</span>
                 </button>
 
                 <div className="text-center text-[10px] text-slate-400">
