@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>
+      (function() {
+        try {
+          var origDefineProperty = Object.defineProperty;
+          Object.defineProperty = function(obj, prop, descriptor) {
+            if ((obj === window || obj === globalThis) && prop === 'fetch') {
+              if (descriptor && descriptor.get && !descriptor.set) {
+                var currentFn;
+                try {
+                  currentFn = descriptor.get();
+                } catch (e) {}
+                return origDefineProperty.call(Object, obj, prop, {
+                  get: function() {
+                    return currentFn;
+                  },
+                  set: function(newFn) {
+                    currentFn = newFn;
+                  },
+                  configurable: true,
+                  enumerable: true
+                });
+              }
+            }
+            return origDefineProperty.apply(Object, arguments);
+          };
+        } catch (err) {
+          console.warn('Fetch setter safeguard could not be attached:', err);
+        }
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ANDEOLA | Digital Solutions & Professional Website Services</title>
+    <meta name="description" content="ANDEOLA helps businesses build, improve and fix their websites with professional services and ready-to-use digital troubleshooting solutions." />
+    <meta property="og:title" content="ANDEOLA | Digital Solutions & Professional Website Services" />
+    <meta property="og:description" content="Website problems? Find the right solution. Professional web services and ready-to-use digital solutions." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23111827'/%3E%3Cpath d='M6 25L14 7h4l8 18h-4.5l-2.2-5.2H10.7L8.5 25H6zm5.9-8.4h8.2L16 9.8 11.9 16.6z' fill='none'/%3E%3Cpath d='M8 25L15 7h2.8l7.2 18h-4.3l-2.1-5.4h-5.8L10.7 25H8z' fill='%232563EB'/%3E%3Cpath d='M16 8l5 13h-4l-1-2.8h-4.2L16 8z' fill='%237C3AED'/%3E%3Ccircle cx='21.5' cy='10.5' r='2' fill='%2306B6D4'/%3E%3C/svg%3E" />
+  </head>
+  <body class="bg-[#F8FAFC] text-[#111827] antialiased selection:bg-[#2563EB]/15 selection:text-[#2563EB]">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
