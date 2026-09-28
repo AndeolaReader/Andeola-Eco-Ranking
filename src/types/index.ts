@@ -94,13 +94,20 @@ export interface VideoReview {
   author: string;
   role: string;
   company: string;
+  quote: string;
   targetName: string;
   type: 'service' | 'digital-solution';
   rating: number;
   summary: string;
   videoThumbnail: string;
   videoDuration: string;
-  videoUrl?: string;
+  videoUrl: string;
+  spokenScript: string;
+  voiceGender: 'female' | 'male';
+  voicePitch?: number;
+  voiceRate?: number;
+  verifiedCustomer: boolean;
+  captions?: { time: number; text: string }[];
 }
 
 export interface BankAccount {

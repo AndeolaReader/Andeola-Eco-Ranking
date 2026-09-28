@@ -638,36 +638,81 @@ export const VIDEO_REVIEWS: VideoReview[] = [
     author: 'Hannah M.',
     role: 'Co-Founder',
     company: 'Kinsley Modern Goods',
+    quote: 'ANDEOLA helped us work through a frustrating mobile checkout issue and gave us a clear way to troubleshoot it.',
     targetName: 'Shopify Checkout Troubleshooting Guide',
     type: 'digital-solution',
     rating: 5,
+    verifiedCustomer: true,
     summary: 'How we solved a mobile checkout abandonment issue ourselves in under an hour without waiting on a developer.',
-    videoThumbnail: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80',
-    videoDuration: '1:45'
+    videoThumbnail: '/videos/hannah-thumb.jpg',
+    videoDuration: '0:30',
+    videoUrl: '/videos/hannah-review.mp4',
+    spokenScript: "I was having this really frustrating issue with our Shopify checkout, especially on mobile. Everything looked fine on the store, but when customers actually tried to check out, we were running into problems. I found the ANDEOLA Shopify Checkout Troubleshooting Guide, and honestly, it made the whole process much easier to understand. Instead of randomly changing things and hoping something worked, I could actually go through the problem step by step. What I really appreciated was how clear everything was. It helped me understand what I was looking at and what I needed to check. Once we worked through the issue, I felt a huge sense of relief because checkout was one less thing I had to worry about. The experience with ANDEOLA was really straightforward, and I would definitely recommend it to another Shopify store owner who is stuck trying to figure out a technical issue.",
+    voiceGender: 'female',
+    voicePitch: 1.05,
+    voiceRate: 0.98,
+    captions: [
+      { time: 0, text: "I was having this really frustrating issue with our Shopify checkout, especially on mobile." },
+      { time: 5, text: "Everything looked fine on the store, but when customers actually tried to check out, we were running into problems." },
+      { time: 10, text: "I found the ANDEOLA Shopify Checkout Troubleshooting Guide, and honestly, it made the process much easier." },
+      { time: 15, text: "Instead of randomly changing things, I could actually go through the problem step by step." },
+      { time: 20, text: "What I appreciated was how clear everything was. It helped me understand what I needed to check." },
+      { time: 25, text: "Once we worked through it, checkout was one less thing to worry about. I'd definitely recommend ANDEOLA." }
+    ]
   },
   {
     id: 'vid-02',
     author: 'David Adeyemi',
     role: 'Managing Director',
     company: 'Stratum Ventures',
-    targetName: 'Website Redesign',
+    quote: "The focus wasn't just on making the website look better. There was real attention to how the website actually performed.",
+    targetName: 'Corporate Website Redesign + Core Web Vitals Optimization',
     type: 'service',
     rating: 5,
+    verifiedCustomer: true,
     summary: 'Our experience hiring ANDEOLA for a complete corporate website rebuild and mobile optimization.',
-    videoThumbnail: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80',
-    videoDuration: '2:12'
+    videoThumbnail: '/videos/david-thumb.jpg',
+    videoDuration: '0:30',
+    videoUrl: '/videos/david-review.mp4',
+    spokenScript: "Our website had reached a point where it didn't really represent the company the way we wanted it to. It needed a more modern structure, a better user experience, and we also had performance issues that we needed to address. Working with ANDEOLA was a very straightforward process. We were able to discuss what wasn't working, identify the areas that needed improvement, and then work through the redesign and Core Web Vitals optimization. What stood out to me was that the focus wasn't just on making the website look better. There was also attention to how the website actually performed. By the end of the project, the site felt much more professional and much more aligned with the company. For us, that was important because our website is often one of the first places people interact with the business. I'm very happy with how the project came together and with the experience of working with ANDEOLA.",
+    voiceGender: 'male',
+    voicePitch: 0.92,
+    voiceRate: 0.95,
+    captions: [
+      { time: 0, text: "Our website had reached a point where it didn't really represent the company the way we wanted it to." },
+      { time: 5, text: "It needed a modern structure, a better user experience, and performance issues that needed addressing." },
+      { time: 10, text: "Working with ANDEOLA was a very straightforward process from start to finish." },
+      { time: 15, text: "We identified areas for improvement, then worked through the redesign and Core Web Vitals optimization." },
+      { time: 20, text: "The focus wasn't just on looks — there was real attention to how the website actually performed." },
+      { time: 25, text: "The site feels much more professional and aligned with our company. Very happy with the experience." }
+    ]
   },
   {
     id: 'vid-03',
     author: 'Elena Rostova',
     role: 'Growth Lead',
     company: 'Verve Botanicals',
+    quote: 'The guide gave our team a practical framework. Our add-to-cart rate increased by 34% across key store pages.',
     targetName: 'E-commerce Conversion Optimization Guide',
     type: 'digital-solution',
     rating: 5,
+    verifiedCustomer: true,
     summary: 'The specific product page checklists that increased our store add-to-cart rate by 34%.',
-    videoThumbnail: 'https://images.unsplash.com/photo-1580894732484-9c4c5148fb84?auto=format&fit=crop&w=800&q=80',
-    videoDuration: '1:58'
+    videoThumbnail: '/videos/elena-thumb.jpg',
+    videoDuration: '0:30',
+    videoUrl: '/videos/elena-review.mp4',
+    spokenScript: "We knew there was something we could improve with our store, but we weren't completely sure where the biggest conversion problems were. The ANDEOLA E-commerce Conversion Optimization Guide gave us a much clearer way to look at the customer journey. Instead of making random changes, we could actually focus on specific areas of the store and understand why those areas mattered. We implemented the recommendations across some of our key pages, and the results were really encouraging. Our add-to-cart rate increased by 34%, which was a result we were genuinely excited about. But beyond the number itself, what I liked was having a much better understanding of why customers were behaving the way they were. The guide gave our team a practical framework that we could actually use. I'd definitely recommend ANDEOLA to an e-commerce team that wants to understand what's holding their website back and make more intentional improvements.",
+    voiceGender: 'female',
+    voicePitch: 1.05,
+    voiceRate: 0.98,
+    captions: [
+      { time: 0, text: "We knew there was something we could improve with our store, but weren't sure where the conversion issues were." },
+      { time: 5, text: "The ANDEOLA E-commerce Conversion Optimization Guide gave us a clearer way to look at the customer journey." },
+      { time: 11, text: "Instead of making random changes, we could focus on specific areas and understand why they mattered." },
+      { time: 16, text: "We implemented the recommendations across key pages, and our add-to-cart rate increased by 34%." },
+      { time: 22, text: "What I loved was having a practical framework and understanding why customers behaved that way." },
+      { time: 26, text: "I'd definitely recommend ANDEOLA to any e-commerce team wanting intentional improvements." }
+    ]
   }
 ];
 
