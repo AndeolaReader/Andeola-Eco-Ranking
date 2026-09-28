@@ -1,100 +1,94 @@
 import React from 'react';
 import { useApp } from './context/AppContext';
 
-// Sections
+// Primary Sections
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
-import { TrustStrip } from './components/TrustStrip';
+import { ValueProposition } from './components/ValueProposition';
+import { SolutionFinder } from './components/SolutionFinder';
+import { DigitalSolutionsMarketplace } from './components/DigitalSolutionsMarketplace';
 import { ServicesSection } from './components/ServicesSection';
-import { WebsiteProblems } from './components/WebsiteProblems';
-import { FreeAuditSection } from './components/FreeAuditSection';
-import { PortfolioSection } from './components/PortfolioSection';
-import { BeforeAfterSection } from './components/BeforeAfterSection';
-import { ProcessSection } from './components/ProcessSection';
-import { PricingSection } from './components/PricingSection';
-import { PaymentSection } from './components/PaymentSection';
-import { ProjectIntakeSection } from './components/ProjectIntakeSection';
+import { HowItWorks } from './components/HowItWorks';
+import { WebsiteAuditSection } from './components/WebsiteAuditSection';
+import { ReviewsSection } from './components/ReviewsSection';
+import { BuyerVideoReviews } from './components/BuyerVideoReviews';
 import { AboutSection } from './components/AboutSection';
-import { TestimonialSection } from './components/TestimonialSection';
 import { FAQSection } from './components/FAQSection';
-import { FinalCTA } from './components/FinalCTA';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
+import { AssistantChat } from './components/AssistantChat';
 
-// Modals
-import { AuditModal } from './components/Modals/AuditModal';
-import { IntakeModal } from './components/Modals/IntakeModal';
-import { PaymentModal } from './components/Modals/PaymentModal';
-import { PortfolioDetailModal } from './components/Modals/PortfolioDetailModal';
-import { ServiceDetailModal } from './components/Modals/ServiceDetailModal';
+// Interactive Modals
+import { SolutionDetailModal } from './components/Modals/SolutionDetailModal';
+import { CartModal } from './components/Modals/CartModal';
+import { CheckoutModal } from './components/Modals/CheckoutModal';
+import { CustomerAccountModal } from './components/Modals/CustomerAccountModal';
+import { ServiceRequestModal } from './components/Modals/ServiceRequestModal';
+import { ServicePaymentModal } from './components/Modals/ServicePaymentModal';
+import { AdminFinanceModal } from './components/Modals/AdminFinanceModal';
+import { VideoPlayerModal } from './components/Modals/VideoPlayerModal';
 
 export default function App() {
   const { activeModal } = useApp();
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-[#08111F] flex flex-col font-sans antialiased selection:bg-[#2563EB]/15 selection:text-[#2563EB]">
-      {/* 1. Sticky Navigation */}
+    <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] flex flex-col font-sans antialiased selection:bg-[#2563EB]/20 selection:text-[#2563EB]">
+      {/* 1. Header Navigation with Search, Cart, Account, and Brand */}
       <Navbar />
 
       <main className="flex-1">
-        {/* 2. Hero Section */}
+        {/* 2. Hero Section: "Website Problems? Find the Right Solution." */}
         <Hero />
 
-        {/* 3. Horizontal Trust Strip */}
-        <TrustStrip />
+        {/* 3. Core Value Proposition: "Two Ways We Can Help" (Hire ANDEOLA vs Get a Digital Solution) */}
+        <ValueProposition />
 
-        {/* 4. Core Services Section */}
+        {/* 4. Interactive 3-Step Solution Finder: "What's Your Website Problem?" */}
+        <SolutionFinder />
+
+        {/* 5. Major Digital Solutions Marketplace (12 Products with Filters & Instant Buy) */}
+        <DigitalSolutionsMarketplace />
+
+        {/* 6. Professional Services Pricing & Scopes (8 Services starting at $100–$800) */}
         <ServicesSection />
 
-        {/* 5. Website Problems Diagnostic */}
-        <WebsiteProblems />
+        {/* 7. How It Works (4 Clear Transparent Steps) */}
+        <HowItWorks />
 
-        {/* 6. Lead Generation: Free Website Audit Section */}
-        <FreeAuditSection />
+        {/* 8. Website Audit: "Not Sure What's Wrong?" */}
+        <WebsiteAuditSection />
 
-        {/* 7. Selected Work Portfolio Showcase */}
-        <PortfolioSection />
+        {/* 9. Verified Reviews (Split into Service Reviews & Digital Solution Reviews) */}
+        <ReviewsSection />
 
-        {/* 8. Before & After Transformation */}
-        <BeforeAfterSection />
+        {/* 10. Buyer Video Reviews: "Real Buyers. Real Experiences." */}
+        <BuyerVideoReviews />
 
-        {/* 9. Methodology Process Steps */}
-        <ProcessSection />
-
-        {/* 10. Pricing Packages */}
-        <PricingSection />
-
-        {/* 11. Secure Project Payment Portal */}
-        <PaymentSection />
-
-        {/* 12. Client Project Intake Form */}
-        <ProjectIntakeSection />
-
-        {/* 13. About ANDEOLA & Why Us */}
+        {/* 11. Meet ANDEOLA (Brand & Quality Standards) */}
         <AboutSection />
 
-        {/* 14. Client Feedback Policy */}
-        <TestimonialSection />
-
-        {/* 15. FAQ */}
+        {/* 12. FAQ Section */}
         <FAQSection />
 
-        {/* 16. Final Large CTA */}
-        <FinalCTA />
-
-        {/* 17. Contact Agency Form */}
+        {/* 13. Contact & Direct WhatsApp Line */}
         <ContactSection />
       </main>
 
-      {/* 18. Footer */}
+      {/* 14. Footer */}
       <Footer />
 
+      {/* 15. Floating AI Assistant: ANDEOLA ASSISTANT */}
+      <AssistantChat />
+
       {/* Active Modal Portals */}
-      {activeModal === 'free-audit' && <AuditModal />}
-      {activeModal === 'project-intake' && <IntakeModal />}
-      {activeModal === 'project-payment' && <PaymentModal />}
-      {activeModal === 'portfolio-details' && <PortfolioDetailModal />}
-      {activeModal === 'service-details' && <ServiceDetailModal />}
+      {activeModal === 'solution-detail' && <SolutionDetailModal />}
+      {activeModal === 'cart' && <CartModal />}
+      {activeModal === 'checkout' && <CheckoutModal />}
+      {activeModal === 'account-downloads' && <CustomerAccountModal />}
+      {activeModal === 'service-request' && <ServiceRequestModal />}
+      {activeModal === 'service-payment' && <ServicePaymentModal />}
+      {activeModal === 'admin' && <AdminFinanceModal />}
+      {activeModal === 'video-player' && <VideoPlayerModal />}
     </div>
   );
 }

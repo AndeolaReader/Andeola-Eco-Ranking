@@ -1,411 +1,780 @@
-import { ServiceItem, PortfolioProject, PricingPackage, FAQItem } from '../types';
+import {
+  ServiceItem,
+  DigitalProduct,
+  Review,
+  VideoReview,
+  ServicePaymentRequest,
+  BankAccount,
+  WithdrawalRecord,
+  FinanceSummary,
+  BrandConfig,
+  FAQItem
+} from '../types';
+
+export const BRAND_CONFIG: BrandConfig = {
+  brandName: 'ANDEOLA',
+  descriptor: 'ECO RANKING',
+  whatsappNumber: '+2348124349094',
+  whatsappDisplay: '+234 812 434 9094',
+  supportEmail: 'webhubtech299@gmail.com',
+  currency: 'USD'
+};
 
 export const SERVICES: ServiceItem[] = [
   {
     id: 'web-design',
-    number: '01',
     name: 'Website Design',
     startingPrice: 800,
-    priceDisplay: 'Starting from $800',
-    priceRange: '$800 – $1,500',
-    description: 'Custom websites designed around your brand, audience, and business goals.',
-    ctaText: 'Explore Service',
+    priceDisplay: 'Starting at $800',
+    priceRange: '$800–$1,500',
+    description: 'Professional responsive websites designed around your business, brand and goals.',
+    ctaText: 'Request Website',
     category: 'design',
     turnaroundTime: '7–14 Days',
     features: [
-      'Tailored UI/UX design architecture',
-      'Mobile-first responsive structure',
-      'High-conversion layouts and clear typography',
-      'Clean modern visual aesthetics'
+      'Tailored UI/UX architecture designed for your market',
+      'Mobile-first responsive layout tested across devices',
+      'Conversion-focused visual hierarchy and CTA placement',
+      'Modern speed, security and on-page SEO best practices'
     ],
-    deliverables: ['Custom design mockup', 'Responsive development', 'Content styling', 'Contact integrations']
+    deliverables: ['Custom design mockup', 'Full frontend build', 'Forms & integrations', 'Testing & launch']
   },
   {
     id: 'web-redesign',
-    number: '02',
     name: 'Website Redesign',
-    startingPrice: 500,
-    priceDisplay: 'Starting from $500',
-    priceRange: '$500 – $1,200',
-    description: 'Transform an outdated website into a modern, responsive, professional experience.',
-    ctaText: 'Explore Service',
+    startingPrice: 600,
+    priceDisplay: 'Starting at $600',
+    priceRange: '$600–$1,200',
+    description: 'Transform an outdated website into a modern, responsive and conversion-focused experience.',
+    ctaText: 'Request Redesign',
     category: 'redesign',
     turnaroundTime: '5–10 Days',
     features: [
-      'Visual hierarchy overhaul',
-      'Elimination of mobile layout bugs',
-      'Cleaner navigation and modern typography',
-      'Zero downtime content migration'
+      'Full visual overhaul replacing dated templates',
+      'Elimination of mobile layout and tap-target bugs',
+      'Streamlined navigation and refined typography',
+      'Preservation of existing domain authority and SEO structure'
     ],
-    deliverables: ['Audit of existing site', 'Modernized interface', 'Mobile responsiveness fix', 'Speed checks']
+    deliverables: ['Current site audit', 'Redesign blueprint', 'Responsive build', 'Zero-downtime migration']
   },
   {
     id: 'web-audit',
-    number: '03',
-    name: 'Website Audit & Diagnostic',
-    startingPrice: 150,
-    priceDisplay: 'Starting from $150',
-    priceRange: '$150 – $350',
-    description: 'Comprehensive forensic analysis of UX, mobile viewport, speed, and conversion bottlenecks on your website or online store.',
-    ctaText: 'Get an Audit',
+    name: 'Website Audit',
+    startingPrice: 100,
+    priceDisplay: 'Starting at $100',
+    priceRange: '$100–$250',
+    description: 'Identify design, UX, performance, SEO and technical issues affecting your website.',
+    ctaText: 'Request Audit',
     category: 'audit',
     turnaroundTime: '2–3 Days',
     features: [
-      'Conversion barrier diagnostic',
-      'Mobile usability & viewport inspection',
-      'Page speed & Core Web Vitals check',
-      'Prioritized remediation action plan'
+      'UX design and visual clarity inspection',
+      'Mobile responsiveness and viewport testing',
+      'Core Web Vitals & speed diagnostic',
+      'Actionable prioritized remediation roadmap'
     ],
-    deliverables: ['Itemized findings report', 'UX review', 'Conversion recommendations', 'Speed guidance']
+    deliverables: ['Detailed audit report PDF', 'Diagnostic breakdown', 'Step-by-step fix checklist', 'Consultation notes']
   },
   {
-    id: 'ecommerce',
-    number: '04',
-    name: 'Shopify & E-commerce Store Design',
-    startingPrice: 800,
-    priceDisplay: 'Starting from $800',
-    priceRange: '$800 – $1,500',
-    description: 'Full custom Shopify & e-commerce store design engineered for browsing simplicity, trust, product merchandising, and high checkout conversion.',
-    ctaText: 'Build My Store',
-    category: 'ecommerce',
-    turnaroundTime: '10–18 Days',
-    features: [
-      'Custom Shopify theme & collection architecture',
-      'Frictionless checkout experience & cart drawer',
-      'Multi-currency payment integration (Paystack, Flutterwave, Stripe, PayPal)',
-      'Inventory, shipping rules & transactional notifications'
-    ],
-    deliverables: ['Full store architecture', 'Product & collection templates', 'Payment gateway setup', 'Testing & launch']
-  },
-  {
-    id: 'landing-pages',
-    number: '05',
-    name: 'Landing Pages',
+    id: 'web-error-fix',
+    name: 'Website Error Fix',
     startingPrice: 100,
-    priceDisplay: 'Starting from $100',
-    priceRange: '$100 – $250',
-    description: 'High-impact landing pages designed to communicate your offer and drive action.',
-    ctaText: 'Build a Landing Page',
-    category: 'landing',
-    turnaroundTime: '3–5 Days',
+    priceDisplay: 'Starting at $100',
+    priceRange: '$100–$500',
+    description: 'Get help identifying and fixing website errors, broken pages and technical problems.',
+    ctaText: 'Fix My Website',
+    category: 'error-fix',
+    turnaroundTime: '24–48 Hours',
     features: [
-      'Laser-focused value proposition layout',
-      'High-contrast primary call-to-action buttons',
-      'Lead capture form integration',
-      'Ultra-fast lightweight loading'
+      'Resolution of broken JavaScript, CSS or styling errors',
+      'Fixing 404 broken links, redirects and routing failures',
+      'Database connection and CMS plugin conflict resolution',
+      'Form submission and checkout gateway bug fixes'
     ],
-    deliverables: ['Above-the-fold wireframe', 'High-conversion design', 'Form integration', 'Mobile QA']
+    deliverables: ['Error log inspection', 'Direct code fix', 'Browser verification', 'Post-fix sanity report']
   },
   {
-    id: 'web-optimization',
-    number: '06',
-    name: 'Website Optimization',
-    startingPrice: 300,
-    priceDisplay: 'Starting from $300',
-    priceRange: '$300 – $600',
-    description: 'Improve an existing website without necessarily rebuilding it from scratch.',
-    ctaText: 'Optimize My Website',
-    category: 'optimization',
+    id: 'shopify-support',
+    name: 'Shopify Support',
+    startingPrice: 150,
+    priceDisplay: 'Starting at $150',
+    priceRange: '$150–$600',
+    description: 'Shopify troubleshooting, customization, store setup and optimization.',
+    ctaText: 'Get Shopify Help',
+    category: 'shopify',
     turnaroundTime: '2–5 Days',
     features: [
-      'Image asset compression & modern WebP formatting',
-      'Render-blocking script cleanup',
-      'CTA placement and clarity adjustments',
-      'Technical on-page SEO improvements'
+      'Theme customization (Liquid, JSON templates, styling)',
+      'App conflict resolution and checkout troubleshooting',
+      'Payment gateway setup (Paystack, Flutterwave, Stripe, PayPal)',
+      'Product catalog, navigation and filter configuration'
     ],
-    deliverables: ['Speed optimization', 'Responsive layout tweaks', 'SEO meta setup', 'Verification audit']
-  }
-];
-
-export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
-  {
-    id: 'nordic-living',
-    name: 'AURA INTERIORS',
-    category: 'E-commerce',
-    isConcept: true,
-    shortDescription: 'Modern furniture and lighting store focused on clean visual merchandising and streamlined mobile checkout.',
-    fullDescription: 'A bespoke e-commerce concept crafted with a warm minimalist aesthetic, generous spacing, high-resolution product galleries, and a frictionless 2-step checkout flow.',
-    imageUrl: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80',
-    accentColor: '#2563EB',
-    deliverables: ['Store Concept', 'Mobile Cart UX', 'Design System'],
-    year: '2026'
+    deliverables: ['Direct store troubleshooting', 'Theme code updates', 'Payment verification', 'Admin walkthrough']
   },
   {
-    id: 'strata-capital',
-    name: 'STRATA VENTURE LABS',
-    category: 'Business',
-    isConcept: true,
-    shortDescription: 'Corporate platform for an emerging tech investment firm requiring institutional credibility and clean typography.',
-    fullDescription: 'Editorial digital experience showcasing portfolio companies, investment thesis, and partner bios with deep navy tones and authoritative sans-serif typography.',
-    imageUrl: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80',
-    accentColor: '#22D3EE',
-    deliverables: ['Brand Architecture', 'Web Platform', 'Responsive System'],
-    year: '2026'
+    id: 'ecommerce-optimization',
+    name: 'Ecommerce Optimization',
+    startingPrice: 300,
+    priceDisplay: 'Starting at $300',
+    priceRange: '$300–$900',
+    description: 'Improve product pages, store experience, navigation, trust and conversion flow.',
+    ctaText: 'Optimize My Store',
+    category: 'ecommerce',
+    turnaroundTime: '4–7 Days',
+    features: [
+      'Product detail page layout & CTA optimization',
+      'Frictionless cart drawer and checkout flow improvements',
+      'Customer trust signals, badge styling and policy integration',
+      'Mobile buying experience & speed improvements'
+    ],
+    deliverables: ['Conversion bottleneck audit', 'High-impact design tweaks', 'Checkout QA', 'Analytics validation']
   },
   {
-    id: 'hyper-saas',
-    name: 'PULSE ANALYTICS',
-    category: 'Landing Page',
-    isConcept: true,
-    shortDescription: 'High-converting SaaS product landing page designed to communicate value quickly and drive trial sign-ups.',
-    fullDescription: 'Engineered for clear hierarchy: an uncluttered split hero, interactive feature breakdown, social proof placement, and sticky navigation with zero distraction.',
-    imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80',
-    accentColor: '#2563EB',
-    deliverables: ['Conversion Copy Flow', 'UI Mockups', 'Landing Page Build'],
-    year: '2026'
-  },
-  {
-    id: 'meridian-law',
-    name: 'VANGUARD LEGAL PARTNERS',
-    category: 'Redesign',
-    isConcept: true,
-    shortDescription: 'Complete redesign of a legacy professional services firm website into an accessible, mobile-ready experience.',
-    fullDescription: 'Replaced a dated, cluttered 2014 layout with clear practice area navigation, attorney directories, and simple consultation booking triggers.',
-    imageUrl: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80',
-    accentColor: '#08111F',
-    deliverables: ['UX Redesign', 'Information Architecture', 'Mobile Optimization'],
-    year: '2026'
-  },
-  {
-    id: 'apex-roastery',
-    name: 'ORBIT ROASTERS',
-    category: 'E-commerce',
-    isConcept: true,
-    shortDescription: 'Artisanal coffee subscription brand experience featuring custom roast selector and recurring billing UI.',
-    fullDescription: 'Rich tactile imagery paired with an easy coffee quiz, subscription tier selections, and seamless mobile pay options.',
-    imageUrl: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80',
-    accentColor: '#2563EB',
-    deliverables: ['Subscription UX', 'Storefront Concept', 'Checkout Flow'],
-    year: '2026'
-  },
-  {
-    id: 'zenith-architecture',
-    name: 'KRONOS STUDIO',
-    category: 'Concept',
-    isConcept: true,
-    shortDescription: 'Minimalist portfolio showcase for an architecture practice emphasizing large-scale photography and quiet navigation.',
-    fullDescription: 'Built with generous negative space, grid-aligned project indexes, and smooth project transitions to let architectural photography take center stage.',
-    imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
-    accentColor: '#22D3EE',
-    deliverables: ['Portfolio Grid', 'Editorial Layout', 'Visual System'],
-    year: '2026'
-  }
-];
-
-export const PRICING_PACKAGES: PricingPackage[] = [
-  {
-    id: 'pkg-audit',
-    name: 'Website Audit & Diagnostic',
+    id: 'speed-optimization',
+    name: 'Website Speed Optimization',
     startingPrice: 150,
-    priceDisplay: 'Starting from $150',
-    priceRange: '$150 – $350',
-    description: 'Detailed forensic analysis of your current website or Shopify store to uncover UX, design, mobile layout, speed, and conversion friction.',
+    priceDisplay: 'Starting at $150',
+    priceRange: '$150–$500',
+    description: 'Identify and improve the technical factors affecting website loading performance.',
+    ctaText: 'Improve My Website',
+    category: 'speed',
+    turnaroundTime: '2–4 Days',
     features: [
-      'Comprehensive UX & visual hierarchy audit',
-      'Mobile responsiveness & tap-target diagnostics',
-      'Speed, page weight & Core Web Vitals audit',
-      'Prioritized remediation action plan',
-      'Delivered in 48–72 hours'
+      'Image asset compression and modern format migration',
+      'Render-blocking script deferral and CSS optimization',
+      'Browser caching and CDN configuration',
+      'Core Web Vitals remediation (LCP, FID/INP, CLS)'
     ],
-    ctaText: 'Get an Audit'
+    deliverables: ['Before/after speed reports', 'Optimized assets', 'Cleaned script configuration', 'Load verification']
   },
   {
-    id: 'pkg-landing',
-    name: 'Landing Page',
-    startingPrice: 100,
-    priceDisplay: 'Starting from $100',
-    priceRange: '$100 – $250',
-    description: 'High-impact, single-page website structured to present your offer with maximum clarity and drive lead action.',
+    id: 'seo-optimization',
+    name: 'SEO & Website Optimization',
+    startingPrice: 200,
+    priceDisplay: 'Starting at $200',
+    priceRange: '$200–$700',
+    description: 'Improve website structure, technical SEO, content organization and discoverability.',
+    ctaText: 'Request Optimization',
+    category: 'seo',
+    turnaroundTime: '3–6 Days',
     features: [
-      'Strategic value proposition structure',
-      'Mobile-first responsive layout',
-      'Lead capture form integration',
-      'Fast loading performance & clean styling',
-      'Standard turnaround 3–5 days'
+      'Semantic HTML structure & heading hierarchy fix',
+      'Meta tags, OpenGraph and Twitter card configuration',
+      'XML sitemap generation and indexing verification',
+      'Internal linking structure and URL readability improvements'
     ],
-    ctaText: 'Build a Landing Page'
-  },
+    deliverables: ['Technical SEO audit', 'Meta tags implementation', 'Sitemap setup', 'Search Console guidance']
+  }
+];
+
+export const DIGITAL_PRODUCTS: DigitalProduct[] = [
   {
-    id: 'pkg-business',
-    name: 'Business Website',
-    startingPrice: 800,
-    priceDisplay: 'Starting from $800',
-    priceRange: '$800 – $1,500',
-    description: 'Custom multi-page website tailored to establish market authority, communicate your business value, and generate qualified leads.',
-    features: [
-      'Custom bespoke UI/UX architecture',
-      'Up to 5 strategic pages (Home, About, Services, etc.)',
-      'Contact & booking inquiry form integrations',
-      'Search engine friendly semantic structure',
-      'Full cross-device viewport testing'
+    id: 'sol-01',
+    name: 'Shopify Checkout Troubleshooting Guide',
+    price: 19,
+    category: 'Shopify',
+    problem: 'Checkout or payment problems affecting a Shopify store.',
+    description: 'Follow a structured troubleshooting process to identify common checkout issues, check configuration problems and work through practical diagnostic steps before hiring a developer.',
+    whoThisIsFor: 'Shopify store owners, dropshippers, and e-commerce managers facing checkout errors or abandoned payments.',
+    whatYouWillReceive: 'Comprehensive PDF troubleshooting guide + interactive digital checklist and verification workbook.',
+    whatsIncluded: [
+      'Checkout troubleshooting checklist',
+      'Common issue categories',
+      'Payment configuration checks',
+      'Shipping configuration checks',
+      'Theme and app conflict checks',
+      'Testing checklist',
+      'Troubleshooting workflow',
+      'Final verification checklist'
     ],
+    format: 'PDF + Digital Documentation',
+    difficulty: 'Intermediate',
+    compatiblePlatforms: ['Shopify', 'Shopify Plus'],
+    problemCategory: 'Checkout',
+    ctaText: 'View Solution',
+    purchaseCtaText: 'Buy & Download',
+    rating: 4.9,
+    reviewCount: 38,
+    salesCount: 142,
     isPopular: true,
-    ctaText: 'Start Business Website'
+    version: 'v2.4',
+    downloadSize: '4.8 MB',
+    importantNotice: 'This guide outlines proven diagnostic steps to resolve configuration, app, and payment setting issues. It does not replace code repairs for broken custom apps.',
+    relatedServiceId: 'shopify-support'
   },
   {
-    id: 'pkg-redesign',
-    name: 'Website Redesign',
-    startingPrice: 500,
-    priceDisplay: 'Starting from $500',
-    priceRange: '$500 – $1,200',
-    description: 'Transform an outdated website into a modern, responsive, and higher-converting digital home without losing brand equity.',
-    features: [
-      'Visual hierarchy and typography overhaul',
-      'Mobile layout cleanup & modern UX',
-      'Content migration & image reformatting',
-      'Speed tuning & broken links remediation',
-      'Preserve existing domain & SEO indexation'
+    id: 'sol-02',
+    name: 'Website Speed Optimization Checklist',
+    price: 15,
+    category: 'Website Performance',
+    problem: 'Website loads slowly.',
+    description: 'A practical checklist for identifying common causes of slow website performance and improving the areas you can control.',
+    whoThisIsFor: 'Website owners, bloggers, and store founders wanting faster page loads and better Core Web Vitals.',
+    whatYouWillReceive: 'Actionable step-by-step PDF speed checklist with asset optimization tools and testing benchmarks.',
+    whatsIncluded: [
+      'Speed audit checklist',
+      'Image optimization checklist',
+      'Large file checklist',
+      'Script review checklist',
+      'Plugin/app review',
+      'Caching checklist',
+      'Mobile performance checklist',
+      'Final testing checklist'
     ],
-    ctaText: 'Redesign My Website'
-  },
-  {
-    id: 'pkg-ecommerce',
-    name: 'Shopify & E-commerce Store',
-    startingPrice: 800,
-    priceDisplay: 'Starting from $800',
-    priceRange: '$800 – $1,500',
-    description: 'Full custom Shopify or e-commerce store configured to make product discovery, browsing, and purchasing seamless.',
-    features: [
-      'Custom Shopify theme & catalog configuration',
-      'Secure multi-currency payment gateway integration',
-      'Mobile shopping cart, drawer & checkout optimization',
-      'Automated transactional emails & policy templates',
-      'Inventory management & app conflict resolution'
-    ],
+    format: 'PDF',
+    difficulty: 'Beginner–Intermediate',
+    compatiblePlatforms: ['WordPress', 'Shopify', 'Webflow', 'Wix', 'General Website'],
+    problemCategory: 'Speed',
+    ctaText: 'View Solution',
+    purchaseCtaText: 'Buy & Download',
+    rating: 4.8,
+    reviewCount: 44,
+    salesCount: 198,
     isPopular: true,
-    ctaText: 'Build My Store'
+    version: 'v3.1',
+    downloadSize: '2.6 MB',
+    relatedServiceId: 'speed-optimization'
   },
   {
-    id: 'pkg-custom',
-    name: 'Custom Architecture',
-    startingPrice: 400,
-    priceDisplay: 'Starting from $400',
-    priceRange: 'Starting from $400+',
-    description: 'Custom requirements, tailored web features, specialized integrations, or personalized digital architectures.',
-    features: [
-      'Tailored scope document and milestone delivery plan',
-      'Dedicated UI/UX wireframing & interactive prototypes',
-      'Custom integrations & component design',
-      'Staging environment testing & launch readiness',
-      'Post-launch support & ongoing maintenance options'
+    id: 'sol-03',
+    name: 'Shopify Theme Error Troubleshooting Guide',
+    price: 25,
+    category: 'Shopify',
+    problem: 'Theme errors, broken sections or unexpected storefront behavior.',
+    description: 'A structured blueprint to identify Liquid template errors, broken section JSON, and app script conflicts safely.',
+    whoThisIsFor: 'Shopify merchants experiencing visual bugs after updating apps, themes, or custom sections.',
+    whatYouWillReceive: 'PDF troubleshooting manual + Liquid debugging checklist and safe rollback procedures.',
+    whatsIncluded: [
+      'Theme troubleshooting workflow',
+      'Theme section checklist',
+      'App conflict checklist',
+      'Browser testing',
+      'Mobile testing',
+      'Basic theme diagnostic steps',
+      'Backup checklist',
+      'Final testing procedure'
     ],
-    ctaText: 'Request a Quote'
+    format: 'PDF + Documentation',
+    difficulty: 'Intermediate',
+    compatiblePlatforms: ['Shopify', 'Shopify Plus'],
+    problemCategory: 'Errors',
+    ctaText: 'View Solution',
+    purchaseCtaText: 'Buy & Download',
+    rating: 4.9,
+    reviewCount: 29,
+    salesCount: 87,
+    version: 'v2.0',
+    downloadSize: '5.2 MB',
+    relatedServiceId: 'shopify-support'
+  },
+  {
+    id: 'sol-04',
+    name: 'WordPress Website Error Troubleshooting Guide',
+    price: 19,
+    category: 'WordPress',
+    problem: 'Common WordPress errors and broken website functionality.',
+    description: 'Step-by-step diagnostic workflow to isolate plugin conflicts, 500 internal server errors, white screen of death, and theme crashes.',
+    whoThisIsFor: 'WordPress and WooCommerce administrators who need to restore site functionality without breaking live data.',
+    whatYouWillReceive: 'Complete WordPress recovery & troubleshooting PDF document with emergency checklist.',
+    whatsIncluded: [
+      'Error identification checklist',
+      'Plugin troubleshooting',
+      'Theme troubleshooting',
+      'Update checks',
+      'Cache checks',
+      'Conflict testing',
+      'Backup checklist',
+      'Recovery workflow'
+    ],
+    format: 'PDF',
+    difficulty: 'Intermediate',
+    compatiblePlatforms: ['WordPress', 'WooCommerce'],
+    problemCategory: 'Errors',
+    ctaText: 'View Solution',
+    purchaseCtaText: 'Buy & Download',
+    rating: 4.7,
+    reviewCount: 31,
+    salesCount: 114,
+    version: 'v2.2',
+    downloadSize: '3.9 MB',
+    relatedServiceId: 'web-error-fix'
+  },
+  {
+    id: 'sol-05',
+    name: '404 Error Fix Guide',
+    price: 9,
+    category: 'Website Errors',
+    problem: 'Broken links and 404 pages.',
+    description: 'Learn how to detect dead links, set up clean 301 redirects, and keep visitors from dropping off when a URL changes.',
+    whoThisIsFor: 'Site managers restructuring pages, updating blogs, or noticing high 404 traffic spikes.',
+    whatYouWillReceive: 'Concise, practical PDF guide with redirect templates and link audit workflows.',
+    whatsIncluded: [
+      'Finding broken URLs',
+      'Checking internal links',
+      'Redirect checklist',
+      'Navigation checks',
+      'Search engine considerations',
+      'Testing checklist'
+    ],
+    format: 'PDF',
+    difficulty: 'Beginner',
+    compatiblePlatforms: ['WordPress', 'Shopify', 'Webflow', 'Squarespace', 'Wix', 'General Website'],
+    problemCategory: 'Errors',
+    ctaText: 'View Solution',
+    purchaseCtaText: 'Buy & Download',
+    rating: 4.8,
+    reviewCount: 22,
+    salesCount: 165,
+    version: 'v1.5',
+    downloadSize: '1.8 MB',
+    relatedServiceId: 'web-error-fix'
+  },
+  {
+    id: 'sol-06',
+    name: 'Mobile Responsiveness Fix Checklist',
+    price: 12,
+    category: 'Mobile',
+    problem: 'Website looks broken or difficult to use on phones.',
+    description: 'Pinpoint mobile viewport clipping, horizontal scrolling errors, illegible text sizes, and cramped touch targets.',
+    whoThisIsFor: 'Designers, entrepreneurs, and developers auditing mobile usability before launch.',
+    whatYouWillReceive: 'Comprehensive mobile QA checklist covering iOS, Android viewports and tablet breakpoints.',
+    whatsIncluded: [
+      'Mobile layout checklist',
+      'Text sizing checklist',
+      'Button sizing',
+      'Navigation checks',
+      'Image scaling',
+      'Horizontal overflow checks',
+      'Tablet testing',
+      'Final mobile QA checklist'
+    ],
+    format: 'PDF',
+    difficulty: 'Beginner',
+    compatiblePlatforms: ['Shopify', 'WordPress', 'Webflow', 'Squarespace', 'Wix', 'General Website'],
+    problemCategory: 'Mobile',
+    ctaText: 'View Solution',
+    purchaseCtaText: 'Buy & Download',
+    rating: 4.9,
+    reviewCount: 36,
+    salesCount: 178,
+    isPopular: true,
+    version: 'v2.1',
+    downloadSize: '2.4 MB',
+    relatedServiceId: 'web-redesign'
+  },
+  {
+    id: 'sol-07',
+    name: 'Website SEO Audit Checklist',
+    price: 15,
+    category: 'SEO',
+    problem: 'Website needs a basic SEO review.',
+    description: 'Ensure search engines can crawl, understand, and index your website pages effectively with structured on-page checkpoints.',
+    whoThisIsFor: 'Website owners seeking higher search visibility without paying thousands for initial agency audits.',
+    whatYouWillReceive: 'Step-by-step PDF checklist covering technical, on-page, and meta tag optimization.',
+    whatsIncluded: [
+      'Title tag checklist',
+      'Meta description checklist',
+      'Heading structure',
+      'Image alt text',
+      'Internal links',
+      'URL structure',
+      'Sitemap checklist',
+      'Indexing checklist',
+      'Mobile checklist'
+    ],
+    format: 'PDF',
+    difficulty: 'Beginner–Intermediate',
+    compatiblePlatforms: ['Shopify', 'WordPress', 'Webflow', 'Squarespace', 'General Website'],
+    problemCategory: 'SEO',
+    ctaText: 'View Solution',
+    purchaseCtaText: 'Buy & Download',
+    rating: 4.8,
+    reviewCount: 42,
+    salesCount: 156,
+    version: 'v2.0',
+    downloadSize: '3.1 MB',
+    relatedServiceId: 'seo-optimization'
+  },
+  {
+    id: 'sol-08',
+    name: 'E-commerce Conversion Optimization Guide',
+    price: 25,
+    category: 'E-commerce',
+    problem: 'Visitors are reaching your store but not converting.',
+    description: 'A conversion engineering document identifying UX barriers across the cart, product pages, trust signals, and checkout.',
+    whoThisIsFor: 'E-commerce store founders experiencing traffic with low sales conversion rates.',
+    whatYouWillReceive: 'High-converting e-commerce UX roadmap PDF with before/after structural diagrams.',
+    whatsIncluded: [
+      'Homepage checklist',
+      'Product page checklist',
+      'CTA checklist',
+      'Trust signals',
+      'Product information',
+      'Navigation',
+      'Cart experience',
+      'Checkout experience',
+      'Mobile conversion checklist'
+    ],
+    format: 'PDF',
+    difficulty: 'Intermediate',
+    compatiblePlatforms: ['Shopify', 'WooCommerce', 'E-commerce'],
+    problemCategory: 'Conversion',
+    ctaText: 'View Solution',
+    purchaseCtaText: 'Buy & Download',
+    rating: 4.9,
+    reviewCount: 50,
+    salesCount: 210,
+    isPopular: true,
+    version: 'v3.0',
+    downloadSize: '6.4 MB',
+    relatedServiceId: 'ecommerce-optimization'
+  },
+  {
+    id: 'sol-09',
+    name: 'Website Security Checklist',
+    price: 15,
+    category: 'Security',
+    problem: 'Website owners want a basic security review.',
+    description: 'A practical baseline checklist to secure login credentials, manage admin access, verify SSL, and schedule automated backups.',
+    whoThisIsFor: 'Small business owners and webmasters wanting essential digital hygiene and protection against common vulnerabilities.',
+    whatYouWillReceive: 'Essential security audit PDF checklist and maintenance routine.',
+    whatsIncluded: [
+      'Password security',
+      'Account access review',
+      'Plugin/app review',
+      'Backup checklist',
+      'SSL/HTTPS check',
+      'Admin access checklist',
+      'Update checklist'
+    ],
+    format: 'PDF',
+    difficulty: 'Beginner',
+    compatiblePlatforms: ['WordPress', 'Shopify', 'Webflow', 'General Website'],
+    problemCategory: 'Security',
+    ctaText: 'View Solution',
+    purchaseCtaText: 'Buy & Download',
+    rating: 4.7,
+    reviewCount: 19,
+    salesCount: 92,
+    version: 'v1.8',
+    downloadSize: '2.1 MB',
+    importantNotice: 'This guide outlines fundamental security hygiene and configuration safeguards. It is not an enterprise penetration test or cybersecurity audit.',
+    relatedServiceId: 'web-error-fix'
+  },
+  {
+    id: 'sol-10',
+    name: 'Product Page Optimization Guide',
+    price: 19,
+    category: 'E-commerce',
+    problem: 'Product pages are not communicating value clearly.',
+    description: 'Learn how to structure compelling descriptions, place high-visibility buy buttons, add social proof, and eliminate hesitation.',
+    whoThisIsFor: 'Store founders wanting to boost product add-to-cart rates and customer confidence.',
+    whatYouWillReceive: 'Product page conversion framework PDF with copy structures and layout checklists.',
+    whatsIncluded: [
+      'Product title checklist',
+      'Product description structure',
+      'Product image checklist',
+      'Benefits vs features',
+      'CTA placement',
+      'Trust elements',
+      'Reviews',
+      'FAQ',
+      'Mobile product-page checklist'
+    ],
+    format: 'PDF',
+    difficulty: 'Beginner–Intermediate',
+    compatiblePlatforms: ['Shopify', 'WooCommerce', 'E-commerce'],
+    problemCategory: 'Product Pages',
+    ctaText: 'View Solution',
+    purchaseCtaText: 'Buy & Download',
+    rating: 4.8,
+    reviewCount: 35,
+    salesCount: 130,
+    version: 'v2.3',
+    downloadSize: '4.2 MB',
+    relatedServiceId: 'ecommerce-optimization'
+  },
+  {
+    id: 'sol-11',
+    name: 'Shopify Store Launch Checklist',
+    price: 19,
+    category: 'Shopify',
+    problem: 'Shopify store owner is preparing to launch.',
+    description: 'Ensure zero embarrassing launch-day mistakes with an itemized checklist covering taxes, shipping zones, domain SSL, and test orders.',
+    whoThisIsFor: 'New store founders launching a brand on Shopify and seeking total peace of mind.',
+    whatYouWillReceive: 'Complete pre-launch and go-live PDF checklist with interactive verification marks.',
+    whatsIncluded: [
+      'Domain checklist',
+      'Theme checklist',
+      'Product checklist',
+      'Navigation checklist',
+      'Payment checklist',
+      'Shipping checklist',
+      'Mobile checklist',
+      'SEO checklist',
+      'Analytics checklist',
+      'Final launch checklist'
+    ],
+    format: 'PDF',
+    difficulty: 'Beginner–Intermediate',
+    compatiblePlatforms: ['Shopify', 'Shopify Plus'],
+    problemCategory: 'Store Setup',
+    ctaText: 'View Solution',
+    purchaseCtaText: 'Buy & Download',
+    rating: 5.0,
+    reviewCount: 48,
+    salesCount: 224,
+    isPopular: true,
+    version: 'v3.2',
+    downloadSize: '3.8 MB',
+    relatedServiceId: 'shopify-support'
+  },
+  {
+    id: 'sol-12',
+    name: 'Website Redesign Planning Document',
+    price: 15,
+    category: 'Website Design',
+    problem: 'Business owner wants to redesign a website but doesn\'t know where to start.',
+    description: 'Avoid redesign paralysis. Plan page architectures, gather asset requirements, define user personas, and establish scope before writing code.',
+    whoThisIsFor: 'Founders preparing for a redesign who want to articulate requirements clearly to a designer or handle it internally.',
+    whatYouWillReceive: 'Editable planning workbook + PDF redesign roadmap with wireframe worksheets.',
+    whatsIncluded: [
+      'Website goals worksheet',
+      'Audience worksheet',
+      'Page planning',
+      'Content checklist',
+      'Design direction',
+      'Mobile planning',
+      'Conversion planning',
+      'Launch checklist'
+    ],
+    format: 'PDF + Editable Document',
+    difficulty: 'Beginner',
+    compatiblePlatforms: ['General Website', 'Shopify', 'WordPress', 'Webflow', 'Squarespace'],
+    problemCategory: 'Design',
+    ctaText: 'View Solution',
+    purchaseCtaText: 'Buy & Download',
+    rating: 4.9,
+    reviewCount: 28,
+    salesCount: 105,
+    version: 'v2.0',
+    downloadSize: '5.0 MB',
+    relatedServiceId: 'web-redesign'
   }
 ];
 
-export const PROCESS_STEPS = [
+export const INITIAL_REVIEWS: Review[] = [
   {
-    number: '01',
-    title: 'DISCOVER',
-    description: 'Understand your business, audience, goals, and current website.'
+    id: 'rev-01',
+    author: 'Daniel K.',
+    company: 'Veritas Retail',
+    rating: 5,
+    date: 'March 14, 2026',
+    content: 'The Shopify Checkout Troubleshooting Guide saved us several days of trial and error. We had a shipping rule conflict that was hiding payment options on mobile. Followed the step-by-step diagnostic and solved it in 45 minutes.',
+    type: 'digital-solution',
+    targetName: 'Shopify Checkout Troubleshooting Guide',
+    verifiedPurchase: true
   },
   {
-    number: '02',
-    title: 'AUDIT',
-    description: 'Identify design, UX, mobile, content, and conversion opportunities.'
+    id: 'rev-02',
+    author: 'Sarah Jenkins',
+    company: 'Oak & Stone Studio',
+    rating: 5,
+    date: 'February 28, 2026',
+    content: 'ANDEOLA completely redesigned our firm website from an outdated 2017 layout into a crisp, responsive brand showcase. Our contact form inquiries doubled within the first month. Transparent milestones and clean communication throughout.',
+    type: 'service',
+    targetName: 'Website Redesign',
+    verifiedPurchase: true
   },
   {
-    number: '03',
-    title: 'DESIGN',
-    description: 'Create the visual direction and user experience.'
+    id: 'rev-03',
+    author: 'Marcus Vance',
+    company: 'Aura Athletics',
+    rating: 5,
+    date: 'March 8, 2026',
+    content: 'Bought the Speed Optimization Checklist. Downsized render-blocking scripts and configured WebP image compression following the instructions. Our mobile load time dropped from 4.8s to 1.3s.',
+    type: 'digital-solution',
+    targetName: 'Website Speed Optimization Checklist',
+    verifiedPurchase: true
   },
   {
-    number: '04',
-    title: 'BUILD',
-    description: 'Develop a responsive, fast, professional website.'
+    id: 'rev-04',
+    author: 'Evelyn Brooks',
+    company: 'Apex Logistics',
+    rating: 5,
+    date: 'January 19, 2026',
+    content: 'We hired ANDEOLA for an in-depth Website Audit. The report was granular, objective, and pointed out exact viewport overflow bugs on newer iPhones that our previous developer missed. Worth every dollar.',
+    type: 'service',
+    targetName: 'Website Audit',
+    verifiedPurchase: true
   },
   {
-    number: '05',
-    title: 'LAUNCH',
-    description: 'Test, optimize, and prepare the website for launch.'
+    id: 'rev-05',
+    author: 'Tariq Al-Mansoor',
+    company: 'Global Craft Hub',
+    rating: 5,
+    date: 'March 2, 2026',
+    content: 'The Shopify Store Launch Checklist is indispensable. We checked off every payment gateway, tax zone, and test order item before turning off password protection. Flawless launch day.',
+    type: 'digital-solution',
+    targetName: 'Shopify Store Launch Checklist',
+    verifiedPurchase: true
+  },
+  {
+    id: 'rev-06',
+    author: 'Chinedu Eze',
+    company: 'Kora Tech Solutions',
+    rating: 5,
+    date: 'February 12, 2026',
+    content: 'We experienced recurring 500 server errors on WordPress after an update. The ANDEOLA team diagnosed the plugin namespace collision within two hours and had everything back online safely.',
+    type: 'service',
+    targetName: 'Website Error Fix',
+    verifiedPurchase: true
   }
 ];
 
-export const WEBSITE_PROBLEMS = [
+export const VIDEO_REVIEWS: VideoReview[] = [
   {
-    title: 'Outdated design',
-    description: 'A dated look causes visitors to question your credibility before reading a single sentence.'
+    id: 'vid-01',
+    author: 'Hannah M.',
+    role: 'Co-Founder',
+    company: 'Kinsley Modern Goods',
+    targetName: 'Shopify Checkout Troubleshooting Guide',
+    type: 'digital-solution',
+    rating: 5,
+    summary: 'How we solved a mobile checkout abandonment issue ourselves in under an hour without waiting on a developer.',
+    videoThumbnail: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80',
+    videoDuration: '1:45'
   },
   {
-    title: 'Poor mobile experience',
-    description: 'Over 60% of web traffic is mobile. Tiny buttons and horizontal overflow instantly lose customers.'
+    id: 'vid-02',
+    author: 'David Adeyemi',
+    role: 'Managing Director',
+    company: 'Stratum Ventures',
+    targetName: 'Website Redesign',
+    type: 'service',
+    rating: 5,
+    summary: 'Our experience hiring ANDEOLA for a complete corporate website rebuild and mobile optimization.',
+    videoThumbnail: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80',
+    videoDuration: '2:12'
   },
   {
-    title: 'Confusing navigation',
-    description: 'When visitors cannot easily find what they are looking for, they leave to visit a competitor.'
-  },
-  {
-    title: 'Weak calls-to-action',
-    description: 'Vague or buried action buttons leave interested prospects unsure of how to get started.'
-  },
-  {
-    title: 'Slow or inefficient pages',
-    description: 'Unoptimized assets and bloated scripts drive bounce rates up and Google search rankings down.'
-  },
-  {
-    title: 'Low visitor trust',
-    description: 'Lack of clear value messaging, contact clarity, and cohesive branding weakens conversions.'
+    id: 'vid-03',
+    author: 'Elena Rostova',
+    role: 'Growth Lead',
+    company: 'Verve Botanicals',
+    targetName: 'E-commerce Conversion Optimization Guide',
+    type: 'digital-solution',
+    rating: 5,
+    summary: 'The specific product page checklists that increased our store add-to-cart rate by 34%.',
+    videoThumbnail: 'https://images.unsplash.com/photo-1580894732484-9c4c5148fb84?auto=format&fit=crop&w=800&q=80',
+    videoDuration: '1:58'
   }
 ];
 
-export const WHY_US_ITEMS = [
+export const INITIAL_PAYMENT_REQUESTS: ServicePaymentRequest[] = [
   {
-    title: 'CUSTOM DESIGN',
-    description: 'Your website should reflect your business rather than look like a generic template.'
+    id: 'req-01',
+    clientName: 'Rachel Adams',
+    email: 'rachel@radamsdesigns.com',
+    service: 'Website Redesign',
+    projectDescription: 'Complete website redesign based on approved scope: modern responsive design, 5 core pages, mobile layout cleanup, and speed tuning.',
+    amount: 1200,
+    dueDate: '2026-10-15',
+    notes: 'Approved scope milestone 1. Payment secures development kickoff.',
+    status: 'pending'
   },
   {
-    title: 'MOBILE FIRST',
-    description: 'Your website should work beautifully across phones, tablets, and desktops.'
-  },
-  {
-    title: 'STRATEGIC UX',
-    description: 'Design decisions should make it easier for visitors to understand your offer.'
-  },
-  {
-    title: 'CONVERSION FOCUSED',
-    description: 'Clear structure and calls-to-action help visitors know what to do next.'
-  },
-  {
-    title: 'RESPONSIVE SUPPORT',
-    description: 'Provide clear communication throughout the project.'
+    id: 'req-02',
+    clientName: 'Michael Chen',
+    email: 'mchen@vortexhardware.com',
+    service: 'Shopify Support & Theme Customization',
+    projectDescription: 'Custom Liquid cart drawer modifications, app conflict debugging, and Paystack/Flutterwave gateway configuration.',
+    amount: 450,
+    dueDate: '2026-10-05',
+    notes: 'Approved project scope.',
+    status: 'pending'
   }
 ];
+
+export const INITIAL_BANK_ACCOUNTS: BankAccount[] = [
+  {
+    id: 'bnk-01',
+    country: 'Nigeria',
+    bankName: 'Access Bank',
+    accountName: 'ANDEOLA ECO RANKING',
+    accountNumberMasked: '******4909',
+    isDefault: true,
+    addedAt: '2026-01-15'
+  }
+];
+
+export const INITIAL_WITHDRAWALS: WithdrawalRecord[] = [
+  {
+    id: 'wd-101',
+    reference: 'WDR-2026-0901',
+    amount: 850,
+    bankAccountId: 'bnk-01',
+    bankDetails: 'Access Bank (******4909)',
+    status: 'Successful',
+    requestedAt: '2026-09-01T14:32:00Z',
+    settledAt: '2026-09-02T10:15:00Z'
+  },
+  {
+    id: 'wd-102',
+    reference: 'WDR-2026-0918',
+    amount: 1200,
+    bankAccountId: 'bnk-01',
+    bankDetails: 'Access Bank (******4909)',
+    status: 'Successful',
+    requestedAt: '2026-09-18T09:10:00Z',
+    settledAt: '2026-09-19T11:40:00Z'
+  }
+];
+
+export const INITIAL_FINANCE: FinanceSummary = {
+  totalRevenue: 8450,
+  digitalSolutionRevenue: 2850,
+  serviceRevenue: 5600,
+  pendingPayments: 1650,
+  settledBalance: 6400,
+  availableBalance: 4350,
+  withdrawnAmount: 2050
+};
 
 export const FAQS: FAQItem[] = [
   {
-    q: 'Do you redesign existing websites?',
-    a: 'Yes. We regularly transform outdated, sluggish, or cluttered websites into modern, responsive, and conversion-focused experiences while preserving your existing domain and brand assets.'
+    q: 'What is the difference between hiring ANDEOLA and buying a Digital Solution?',
+    a: 'We offer two clear pathways: If you want our engineering team to handle the work directly, you choose a Professional Service (such as Website Redesign, Shopify Support, or Error Fixing). If you prefer to diagnose and solve the problem yourself, you can purchase an instant Digital Solution (a structured guide, checklist, or troubleshooting document) for a small one-time fee.',
+    category: 'general'
   },
   {
-    q: 'Can you build or redesign a Shopify store or e-commerce website?',
-    a: 'Yes. We design and build high-converting Shopify stores and e-commerce websites ($800–$1,500) and perform complete Shopify store redesigns (starting from $500) with clean product merchandising, custom theme styling, cart drawer optimization, and multi-currency gateway integrations (Paystack, Flutterwave, Stripe, PayPal).'
+    q: 'How do I download a Digital Solution after purchase?',
+    a: 'Instantly after your payment is confirmed, your download is unlocked directly on screen. You can also view and download all your past purchases at any time by clicking "Account" or "My Downloads" in the top navigation.',
+    category: 'digital-solutions'
   },
   {
-    q: 'Can you audit my current website or Shopify store?',
-    a: 'Yes. We offer both a free initial website evaluation and comprehensive forensic website audits ($150–$350) that inspect UX design, mobile responsiveness, page speed, content hierarchy, and conversion bottlenecks.'
+    q: 'What formats do Digital Solutions come in?',
+    a: 'Most solutions come as formatted high-resolution PDFs accompanied by interactive digital checklists and editable planning workbooks where applicable. They are optimized for reading on desktops, tablets, and phones.',
+    category: 'digital-solutions'
   },
   {
-    q: 'Do you work with existing websites?',
-    a: 'Yes. If you do not need a complete rebuild, we can optimize your existing website layout, fix mobile styling issues, improve loading times, and clarify your calls-to-action.'
+    q: 'Can I start with a Digital Solution and hire ANDEOLA later if I need help?',
+    a: 'Yes! Many clients start by reading a troubleshooting guide or checklist. If you decide you would rather have our team take over the implementation, we can credit part of your digital solution purchase toward your custom service project.',
+    category: 'services'
   },
   {
-    q: 'Will my website be mobile responsive?',
-    a: 'Every website we build or redesign is designed mobile-first and tested rigorously across standard mobile viewports (320px, 375px, 390px, 430px) as well as tablets and desktops.'
+    q: 'What payment methods do you accept?',
+    a: 'All pricing is in USD ($). We accept secure online payments via Paystack (our primary gateway for Nigeria and international cards), Flutterwave, Stripe, and PayPal. Card details are processed directly through 256-bit SSL encrypted gateway endpoints.',
+    category: 'payments'
   },
   {
-    q: 'How long does a website project take?',
-    a: 'Most standard landing pages and audits take 2 to 5 days. Full custom business websites and redesigns typically take 7 to 14 days, depending on project scope and content readiness.'
+    q: 'How does custom service pricing and payment work?',
+    a: 'Services feature transparent starting rates and expected typical ranges. Once we review your website requirements, we provide an agreed milestone scope and generate a secure custom Payment Request. You can review the deliverables and pay securely online to initiate the project.',
+    category: 'services'
   },
   {
-    q: 'Can I request a custom website?',
-    a: 'Yes. For businesses with unique requirements, custom workflows, or complex architectures, we provide custom scope planning and transparent milestone quotes.'
-  },
-  {
-    q: 'Do you provide website maintenance?',
-    a: 'Yes. We provide scheduled updates, performance health checks, and ongoing content adjustments on a scope-based arrangement after launch.'
-  },
-  {
-    q: 'How do I start a project?',
-    a: 'You can request a free website audit, submit a project request form on our contact section, or use our project start form. We review your details and reply with clear next steps within 24 hours.'
+    q: 'Do you offer a free website audit?',
+    a: 'Yes. You can submit your website URL, platform, and main challenge through our "Not Sure What\'s Wrong?" audit form. Our team performs an initial diagnostic and shares actionable feedback on what is holding your site back.',
+    category: 'services'
   }
 ];

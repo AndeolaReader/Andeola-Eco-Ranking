@@ -25,21 +25,21 @@ export const LogoSymbol: React.FC<{ size?: number; className?: string; theme?: '
     >
       <defs>
         <linearGradient id="andeolaA1" x1="4" y1="36" x2="22" y2="4" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#1D4ED8" />
+          <stop offset="0%" stopColor="#1E3A8A" />
           <stop offset="100%" stopColor="#2563EB" />
         </linearGradient>
         <linearGradient id="andeolaA2" x1="18" y1="36" x2="36" y2="4" gradientUnits="userSpaceOnUse">
           <stop offset="0%" stopColor="#2563EB" />
-          <stop offset="100%" stopColor="#22D3EE" />
+          <stop offset="100%" stopColor="#7C3AED" />
         </linearGradient>
         <linearGradient id="andeolaCross" x1="12" y1="24" x2="30" y2="24" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#22D3EE" />
-          <stop offset="100%" stopColor="#2563EB" />
+          <stop offset="0%" stopColor="#2563EB" />
+          <stop offset="100%" stopColor="#7C3AED" />
         </linearGradient>
       </defs>
 
-      {/* Deep Navy precision foundation plate */}
-      <rect width="40" height="40" rx="9" fill={theme === 'light' ? '#08111F' : '#08111F'} />
+      {/* Deep Navy precision foundation */}
+      <rect width="40" height="40" rx="10" fill={theme === 'light' ? '#0F172A' : '#0F172A'} />
 
       {/* Left structural pillar - ascending foundation */}
       <path
@@ -59,8 +59,8 @@ export const LogoSymbol: React.FC<{ size?: number; className?: string; theme?: '
         fill="url(#andeolaCross)"
       />
 
-      {/* Digital node spark */}
-      <circle cx="28.5" cy="11.5" r="2.2" fill="#22D3EE" />
+      {/* Purple accent spark */}
+      <circle cx="28.5" cy="11.5" r="2.2" fill="#7C3AED" />
     </svg>
   );
 };
@@ -98,7 +98,7 @@ export const Logo: React.FC<LogoProps> = ({
             <span
               className={`font-black tracking-[0.08em] font-sans uppercase transition-colors ${
                 textSizes[size]
-              } ${isLight ? 'text-white' : 'text-[#08111F]'}`}
+              } ${isLight ? 'text-white' : 'text-[#0F172A]'}`}
             >
               ANDEOLA
             </span>
@@ -106,11 +106,11 @@ export const Logo: React.FC<LogoProps> = ({
 
           {showSubtitle && (
             <span
-              className={`text-[9.5px] font-semibold tracking-[0.2em] uppercase mt-1 ${
-                isLight ? 'text-slate-400' : 'text-slate-500'
+              className={`text-[9.5px] font-bold tracking-[0.22em] uppercase mt-1 ${
+                isLight ? 'text-blue-300' : 'text-slate-500'
               }`}
             >
-              EcoRank Web Solution
+              ECO RANKING
             </span>
           )}
         </div>

@@ -1,84 +1,150 @@
 export interface ServiceItem {
   id: string;
-  number: string;
   name: string;
   startingPrice: number;
   priceDisplay: string;
-  priceRange?: string;
+  priceRange: string;
   description: string;
   ctaText: string;
-  category: 'design' | 'redesign' | 'audit' | 'ecommerce' | 'landing' | 'optimization';
+  category: 'design' | 'redesign' | 'audit' | 'error-fix' | 'shopify' | 'ecommerce' | 'speed' | 'seo';
   turnaroundTime: string;
   features: string[];
   deliverables: string[];
 }
 
-export interface PortfolioProject {
+export interface DigitalProduct {
   id: string;
   name: string;
-  category: 'Business' | 'E-commerce' | 'Landing Page' | 'Redesign' | 'Concept';
-  isConcept: boolean;
-  shortDescription: string;
-  fullDescription: string;
-  imageUrl: string;
-  accentColor: string;
-  deliverables: string[];
-  year: string;
-}
-
-export interface PricingPackage {
-  id: string;
-  name: string;
-  startingPrice: number;
-  priceDisplay: string;
-  priceRange?: string;
+  price: number;
+  category: string;
+  problem: string;
   description: string;
-  features: string[];
-  isPopular?: boolean;
+  whoThisIsFor: string;
+  whatYouWillReceive: string;
+  whatsIncluded: string[];
+  format: string;
+  difficulty: 'Beginner' | 'Beginner–Intermediate' | 'Intermediate' | 'Advanced';
+  compatiblePlatforms: string[];
+  problemCategory: 'Checkout' | 'Speed' | 'SEO' | 'Mobile' | 'Errors' | 'Design' | 'Conversion' | 'Security' | 'Product Pages' | 'Store Setup';
   ctaText: string;
+  purchaseCtaText: string;
+  rating: number;
+  reviewCount: number;
+  salesCount: number;
+  isPopular?: boolean;
+  version: string;
+  downloadSize: string;
+  importantNotice?: string;
+  relatedServiceId?: string;
 }
 
-export interface AuditRequest {
+export interface CartItem {
+  product: DigitalProduct;
+  quantity: number;
+}
+
+export interface Order {
   id: string;
-  fullName: string;
-  businessName: string;
+  orderNumber: string;
+  customerName: string;
   email: string;
-  websiteUrl: string;
-  needHelpWith: string;
-  message: string;
-  submittedAt: string;
+  country: string;
+  items: {
+    productId: string;
+    productName: string;
+    price: number;
+    format: string;
+  }[];
+  totalAmount: number;
+  paymentGateway: 'paystack' | 'flutterwave' | 'stripe' | 'paypal';
+  paymentReference: string;
+  status: 'completed' | 'processing' | 'pending';
+  paidAt: string;
+  downloadToken: string;
 }
 
-export interface ProjectIntake {
+export interface ServicePaymentRequest {
   id: string;
-  name: string;
-  email: string;
-  businessName: string;
-  websiteUrl?: string;
-  projectType: string;
-  businessDescription: string;
-  targetAudience: string;
-  mainGoal: string;
-  preferredStyle: string;
-  referenceWebsites?: string;
-  additionalRequirements?: string;
-  fileName?: string;
-  submittedAt: string;
-}
-
-export interface ClientPayment {
-  id: string;
-  reference: string;
   clientName: string;
   email: string;
   service: string;
+  projectDescription: string;
   amount: number;
-  gateway: 'paystack' | 'flutterwave' | 'stripe' | 'paypal';
-  status: 'pending' | 'completed';
-  paidAt: string;
+  dueDate: string;
+  notes?: string;
+  status: 'pending' | 'paid';
+  reference?: string;
+  paidAt?: string;
+}
+
+export interface Review {
+  id: string;
+  author: string;
+  company?: string;
+  rating: number;
+  date: string;
+  content: string;
+  type: 'service' | 'digital-solution';
+  targetName: string;
+  verifiedPurchase: boolean;
+}
+
+export interface VideoReview {
+  id: string;
+  author: string;
+  role: string;
+  company: string;
+  targetName: string;
+  type: 'service' | 'digital-solution';
+  rating: number;
+  summary: string;
+  videoThumbnail: string;
+  videoDuration: string;
+  videoUrl?: string;
+}
+
+export interface BankAccount {
+  id: string;
+  country: string;
+  bankName: string;
+  accountName: string;
+  accountNumberMasked: string;
+  isDefault: boolean;
+  addedAt: string;
+}
+
+export interface WithdrawalRecord {
+  id: string;
+  reference: string;
+  amount: number;
+  bankAccountId: string;
+  bankDetails: string;
+  status: 'Pending' | 'Processing' | 'Successful' | 'Failed' | 'Reversed';
+  requestedAt: string;
+  settledAt?: string;
+}
+
+export interface FinanceSummary {
+  totalRevenue: number;
+  digitalSolutionRevenue: number;
+  serviceRevenue: number;
+  pendingPayments: number;
+  settledBalance: number;
+  availableBalance: number;
+  withdrawnAmount: number;
+}
+
+export interface BrandConfig {
+  brandName: string;
+  descriptor: string;
+  whatsappNumber: string;
+  whatsappDisplay: string;
+  supportEmail: string;
+  currency: string;
 }
 
 export interface FAQItem {
   q: string;
   a: string;
+  category?: 'general' | 'digital-solutions' | 'services' | 'payments';
 }
